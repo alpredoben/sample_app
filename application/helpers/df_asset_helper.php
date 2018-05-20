@@ -14,3 +14,10 @@ if(!function_exists('path_web'))
         return 'assets/web/';
     }
 }
+
+if(!function_exists('path_template'))
+{
+    function path_template(){
+        return 'assets/template/';
+    }
+}

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <?php $this->load->view($this->config->item("admin_root") . 'pages/admin_header'); ?>
+</head>
+
+<body>
+<?php 
+    $this->load->view($this->config->item("admin_root") . 'pages/admin_nav');
+    $this->load->view($this->config->item("admin_root") . 'pages/admin_content');
+    $this->load->view($this->config->item("admin_root") . 'pages/admin_footer');
+?>
+</body>
+</html>
