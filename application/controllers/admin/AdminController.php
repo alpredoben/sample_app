@@ -42,7 +42,7 @@ class AdminController extends Web_Environment {
         $data = $this->get_default(); 
         $data['subtitle'] = 'MASTER PRODUK KOPI';
         $data['content']  = $this->root_adm . 'pages/admin_product';
-        $data['active_']  = 'product';
+        $data['scripts']  = 'assets/web/js/item/product.js';
 		$this->render('admin_layout', $data);
     }
 
@@ -51,7 +51,7 @@ class AdminController extends Web_Environment {
         $data = $this->get_default(); 
         $data['subtitle'] = 'MASTER PRODUK MESIN';
         $data['content']  = $this->root_adm . 'pages/admin_machine';
-        $data['active_']  = 'machine';
+        $data['scripts']  = 'assets/web/js/item/machine.js';
 		$this->render('admin_layout', $data);
     }
 
