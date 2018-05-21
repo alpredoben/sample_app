@@ -8,6 +8,7 @@ var configTools = new ConfigTools();
 
 $(document).ready(function () {
     
+    
     var txtUserLogin = '#user_id',
         txtUserPassword = '#user_pwd',
         btnSubmitLogin = '#btn_login';
@@ -21,16 +22,20 @@ $(document).ready(function () {
                 "user_pwd" : $(txtUserPassword).val()
             };
     
-            axios.post(root_login, data_set).then(function (response) {
-                response = response.data;
-                if(response.status == false)
+            axios.post(window.site_url + 'user/login/validate', data_set).then(function (response) {
+                var messages = response.data.messages;
+                var status = response.data.status;
+
+                if(status == false)
                 {
-                    boxAlert.alertError('Login Gagal', response.messages);
+                    boxAlert.alertError('Login Gagal', messages);
                 }
                 else{
-                    window.location = response.messages; // header('Location : site')
+                    console.log(messages);
+                    window.location.href = messages; 
                 }
-    
+                
+                console.log(response);
     
             }).catch(function (error) {
                 console.log(error);

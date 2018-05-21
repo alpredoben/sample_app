@@ -1,20 +1,12 @@
-
 <script>
     window.site_url = "<?php echo base_url(); ?>";
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 
-<?php 
-if(isset($scripts)){
-    foreach ($scripts as $val) {
-?>
-        <script type="text/javascript" src="<?php echo site_url($val); ?>"></script>
-<?php
-    }
-}
-?>
-</html>
+<script src="<?php echo base_url(); ?>assets/vendor/jquery/dist/jquery.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/vendor/axios/dist/axios.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/vendor/jquery-confirm/dist/jquery-confirm.min.js"></script>
+
+<script src="<?php echo base_url(); ?>assets/web/js/components.js"></script>
+<script src="<?php echo base_url(); ?>assets/web/js/auth/auths.js"></script>

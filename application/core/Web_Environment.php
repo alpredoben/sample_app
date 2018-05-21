@@ -20,48 +20,6 @@ class Web_Environment extends CI_Controller
         }
     }
 
-    public function get_default($subtitle)
-    {
-        return array(
-            'title' => 'PT. COFFINDO',
-            'subtitle' => $subtitle,
-            'login_level' => $this->session->userdata('level_name'),
-            'login_name'  => $this->session->userdata('username')
-        );
-    }
-
-
-    public function getScripts($scripts = null)
-    {
-        $js = array(
-            path_template() . 'dist/js/site.min.js',
-            path_web() . 'js/root_site.js',
-			path_web() . 'js/components.js',
-        );
-
-        if($scripts != null){
-            foreach ($scripts as $v) {
-                array_push($js, $v);   
-            }
-        }
-        return $js;
-    }
-
-    public function getStyles($styles = null)
-    {
-        $css = array(
-            path_template() . 'dist/css/site.min.css',
-        );
-
-        if($styles != null){
-            foreach ($styles as $v) {
-                array_push($css, $v);
-            }
-        }
-
-        return $css;
-    }
-
     public function render($page='', $data)
     {
         if($page == '')

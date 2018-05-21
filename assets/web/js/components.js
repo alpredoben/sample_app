@@ -1,4 +1,3 @@
-'use strict'
 
 class BoxAlertInformation
 {
@@ -25,6 +24,9 @@ class BoxAlertInformation
         });
     }
 
+    alertTest(){
+        return "hello";
+    }
     
 }
 
