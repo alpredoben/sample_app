@@ -2,25 +2,24 @@
     <div class="row">
         <div class="col-md-12">
             <div class="contents">
-                <h4 class="text-info">Form Tambah Dan Update Produk</h4>
+                <h4 class="text-info">Form Data Mesin</h4>
                 <hr>
                 <form class="inline">
                     <div class="col-md-4">
-                        <label for="">ID Kopi</label>
-                        <input type="text" id="txtIDKopi" class="form-control" placeholder="Unik ID Kopi">
+                        <label for="">ID Mesin</label>
+                        <input type="text" id="txtIDMesin" class="form-control" placeholder="Unik ID Mesin">
                     </div>
                     
                     <div class="col-md-4">
-                        <label for="">Nama Kopi</label>
-                        <input type="text" id="txtNamaKopi" class="form-control" placeholder="Nama Kopi">
+                        <label for="">Nama Mesin</label>
+                        <input type="text" id="txtNamaMesin" class="form-control" placeholder="Nama Mesin">
                     </div>
 
                     <div class="col-md-4" style="margin-top:24px; margin-left:-5px;">
-                        <button type="button" id="btnSimpanKopi" class="btn btn-primary">Simpan</button>
+                        <button type="button" id="btnSimpanMesin" class="btn btn-primary">Simpan</button>
                         <span>&nbsp;</span>
                         <button type="button" class="btn btn-warning" id="btnKembali">Kembali</button>
                     </div>
-
                 </form>
             </div>
         </div>
@@ -32,17 +31,17 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Tabel Master Data Kopi</h3>
+                    <h3 class="panel-title">Tabel Master Data Mesin</h3>
                 </div>
                 <div class="panel-body">
-                    <table id="tblProdukKopi" class="display nowrap hover" style="width:100%">
+                    <table id="tabelDataMesin" class="display nowrap hover" style="width:100%">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>ID Produk</th>
-                                <th>Nama Produk</th>
-                                <th>Waktu Penambahan</th>
-                                <th>Waktu Update</th>
+                                <th>ID Mesin</th>
+                                <th>Nama Mesin</th>
+                                <th>Create Date</th>
+                                <th>Update Date</th>
                                 <th>#</th>
                             </tr>
                         </thead>

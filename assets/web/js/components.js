@@ -31,7 +31,31 @@ class BoxAlertInformation
 }
 
 class ConfigTools{
-    getConfig(){
-        return 'hello';
+    loadTableMaster(_tools_name, _url_name){
+        var table_master =  $(_tools_name).DataTable({
+            "processing": true, 
+            "serverSide": true, 
+            "ajax": {
+                "url": _url_name,
+                "type": "POST"
+            },   
+            "columnDefs": [
+                { 
+                    "targets": [ 0 ], 
+                    "orderable": false, 
+                },
+            ],    
+        });
+    
+        return table_master;
+    }
+
+    loadLocationWindow(){
+        window.location.reload();
+    }
+
+    resetFormMaster(_first, _second){
+        $(_first).val('');
+        $(_second).val('');
     }
 }

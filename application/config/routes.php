@@ -53,13 +53,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /** Admin Root Control */
 $route['admin'] = 'admin/AdminController';
 $route['admin/produk'] = 'admin/AdminController/view_produk';
+$route['admin/mesin']  = 'admin/AdminController/view_mesin';
 
-$route['admin/tambah/produk']       = 'service/ProductController/tambah_produk';
-$route['admin/list/produk']         = 'service/ProductController/datatable_produk';
-$route['admin/show/produk/(:any)']  = 'service/ProductController/show_produk/$1';
-$route['admin/ubah/produk']         = 'service/ProductController/ubah_produk';
-$route['admin/hapus/produk/(:any)'] = 'service/ProductController/hapus_produk/$1';
+/** Service Admin Product */
+$route['admin/produk/tambah/produk']       = 'service/ProductController/tambah_produk';
+$route['admin/produk/list/produk']         = 'service/ProductController/datatable_produk';
+$route['admin/produk/show/produk/(:any)']  = 'service/ProductController/show_produk/$1';
+$route['admin/produk/ubah/produk']         = 'service/ProductController/ubah_produk';
+$route['admin/produk/hapus/produk/(:any)'] = 'service/ProductController/hapus_produk/$1';
 
+/** Service Admin Machine */
+$route['admin/mesin/list/mesin']           = '';
+$route['admin/mesin/show/mesin/']          = '';
+$route['admin/mesin/hapus/mesin/']         = '';
 
 /** Login Validation */
 $route['user/login/validate'] = 'AuthController/login_validate';

@@ -1,50 +1,27 @@
 'use strict'
 
 var box_alert = new BoxAlertInformation();
+var config_tools = new ConfigTools();
 
-function load_table_produk() {  
-    var tabel_product =  $('#tblProdukKopi').DataTable({
-        "processing": true, 
-        "serverSide": true, 
-        "ajax": {
-            "url": window.site_url + 'admin/list/produk',
-            "type": "POST"
-        },   
-        "columnDefs": [
-            { 
-                "targets": [ 0 ], 
-                "orderable": false, 
-            },
-        ],    
-    });
+var url_product_list = window.site_url + 'admin/produk/list/produk';
+var url_machine_list = window.site_url + 'admin/mesin/list/mesin';
 
-    return tabel_product;
-}
 
+/** Event Admin Product */
 function EditProduct(id){
-    var _url = window.site_url + 'admin/show/produk/' + id;
+    var _url = window.site_url + 'admin/produk/show/produk/' + id;
     $.getJSON(_url, function( data ) {
         var set_edit = data.messages;
         $('#txtIDKopi').val(set_edit.product_id);
         $('#txtIDKopi').attr('readonly', true);
         $('#txtNamaKopi').val(set_edit.product_name);
-        $('#btnSimpan').text('Update');
+        $('#btnSimpanKopi').text('Update');
         $('#btnKembali').show();
     });
 }
 
-function ResetFormProduct()
-{
-    $('#txtIDKopi').val('');
-    $('#txtNamaKopi').val('');
-}
-
-function LoadLocationWindow(){
-    window.location.reload();
-}
-
 function DeleteProduct(id){
-    var _url = window.site_url + 'admin/hapus/produk/' + id;
+    var _url = window.site_url + 'admin/produk/hapus/produk/' + id;
 
     $.confirm({
         title: 'HAPUS PRODUK!',
@@ -60,7 +37,7 @@ function DeleteProduct(id){
                         if ( $.fn.DataTable.isDataTable('#tblProdukKopi') ) {
                             $('#tblProdukKopi').DataTable().destroy();
                         }
-                        var tbl = load_table_produk();
+                        var tbl = config_tools.loadTableMaster('#tblProdukKopi', url_product_list);
                     }
                     else{
                         box_alert.alertError('GAGAL INFO', data.messages);
@@ -72,40 +49,103 @@ function DeleteProduct(id){
     });
 }
 
+/** Even Admin Machine */
+function EditMachine(id){
+    var _url = window.site_url + 'admin/mesin/show/mesin/' + id;
+    $.getJSON(_url, function( data ) {
+        var set_edit = data.messages;
+        $('#txtIDMesin').val(set_edit.machine_id);
+        $('#txtIDMesin').attr('readonly', true);
+        $('#txtNamaMesin').val(set_edit.machine_name);
+        $('#btnSimpanMesin').text('Update');
+        $('#btnKembali').show();
+    });
+}
+
+function DeleteMachine(id){
+    var _url = window.site_url + 'admin/mesin/hapus/mesin/' + id;
+
+    $.confirm({
+        title: 'HAPUS PRODUK!',
+        content: 'Apakah anda yakin, ingin menghapus data mesin ini ?',
+        theme:'modern',
+        type:'red',
+        buttons: {
+            ya: function () {
+                $.getJSON(_url, function( data ) {
+                    console.log(data);
+                    if(data.status == true){
+                        box_alert.alertSuccess('BERHASIL INFO', data.messages);
+                        if ( $.fn.DataTable.isDataTable('#tblProdukKopi') ) {
+                            $('#tabelDataMesin').DataTable().destroy();
+                        }
+                        var tbl = config_tools.loadTableMaster('#tabelDataMesin', url_machine_list);
+                    }
+                    else{
+                        box_alert.alertError('GAGAL INFO', data.messages);
+                    }
+                });
+            },
+            tidak: function(){}
+        }
+    });
+}
+
+
+
+/** Document Ready Function */
 $(document).ready(function () {
     
+    /** DEFAULT VARIABLE */
     var btnKembali = '#btnKembali';
-    var btnSimpan = '#btnSimpan';
+    var myDataTables;
 
-    var txtIDKopi = '#txtIDKopi';
-    var txtNamaKopi = '#txtNamaKopi';
-    var tableProduk =  load_table_produk();
+    /** MASTER PRODUCT VARIABLE */
+    var btnSimpanKopi = '#btnSimpanKopi';
+    var txtIDKopi     = '#txtIDKopi';
+    var txtNamaKopi   = '#txtNamaKopi';
 
+    consoel.log(window.state_active);
+
+    switch (window.state_active.toUpperCase()) {
+        case 'product':
+            myDataTables = config_tools.loadTableMaster('#tblProdukKopi', url_product_list);
+            break;
+        case 'machine':
+            myDataTables = config_tools.loadTableMaster('#tabelDataMesin', url_machine_list);
+            break;
+        default:
+            myDataTables = null;
+            break;
+    }
+
+
+    /** EVENT MASTER PRODUCT */
     $(btnKembali).hide();
 
     $(btnKembali).click(function (e) { 
         e.preventDefault();
-        LoadLocationWindow();
+        config_tools.loadLocationWindow();
     });
 
-    $(btnSimpan).click(function (e) { 
+    $(btnSimpanKopi).click(function (e) { 
         e.preventDefault();
         
-        var text_button = $(btnSimpan).text();
+        var text_button = $(btnSimpanKopi).text();
         var set_data = null;
         var url_root = '';
 
         if(text_button.toLowerCase() == 'simpan')
         {
             if($(txtIDKopi).val() != '' && $(txtNamaKopi).val() != '')
-               url_root = window.site_url + 'admin/tambah/produk';
+               url_root = window.site_url + 'admin/produk/tambah/produk';
             else
                 box_alert.alertError('WARNING', 'Silahkan isi ID Produk dan Nama Produk Kopi dengan benar', 'warning');
         }
         else
         {
             if($(txtNamaKopi).val() != '')
-                url_root = window.site_url + 'admin/ubah/produk';
+                url_root = window.site_url + 'admin/produk/ubah/produk';
             else
                 box_alert.alertError('WARNING', 'Silahkan diisi update Nama Produk Kopi', 'warning');
         }
@@ -124,7 +164,7 @@ $(document).ready(function () {
 
             if(status == true){
                 box_alert.alertSuccess('SUCCESS', messages);
-                tableProduk.ajax.reload();
+                myDataTables.ajax.reload();
             }
             else{
                 box_alert.alertError('ERROR', messages);
@@ -135,12 +175,12 @@ $(document).ready(function () {
         });
 
         if(text_button.toLowerCase() == 'update'){
-            $(btnSimpan).text('Simpan');
+            $(btnSimpanKopi).text('Simpan');
             $('#txtIDKopi').removeAttr('readonly');
             $('#btnKembali').hide();
         }
-            
-        ResetFormProduct();
+        
+        config_tools.resetFormMaster(txtIDKopi, txtNamaKopi);
 
     });
     

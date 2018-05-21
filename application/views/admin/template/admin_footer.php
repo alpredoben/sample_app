@@ -6,6 +6,7 @@
 
 <script>
     window.site_url = "<?php echo base_url(); ?>";
+    window.state_active = "<?php echo (isset($active_)) ? $active_ : '' ?>";
 </script>
 
 <script src="<?php echo base_url(); ?>assets/vendor/jquery/dist/jquery.min.js"></script>

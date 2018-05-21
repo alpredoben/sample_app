@@ -42,10 +42,18 @@ class AdminController extends Web_Environment {
         $data = $this->get_default(); 
         $data['subtitle'] = 'MASTER PRODUK KOPI';
         $data['content']  = $this->root_adm . 'pages/admin_product';
+        $data['active_']  = 'product';
 		$this->render('admin_layout', $data);
     }
 
-    
+    public function view_mesin()
+    {
+        $data = $this->get_default(); 
+        $data['subtitle'] = 'MASTER PRODUK MESIN';
+        $data['content']  = $this->root_adm . 'pages/admin_machine';
+        $data['active_']  = 'machine';
+		$this->render('admin_layout', $data);
+    }
 
     
 
