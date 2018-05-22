@@ -34,7 +34,7 @@
                     <h3 class="panel-title">Tabel Master Data Mesin</h3>
                 </div>
                 <div class="panel-body">
-                    <table id="tabelDataMesin" class="display nowrap hover" style="width:100%">
+                    <table id="tblDataMesin" class="display nowrap hover" style="width:100%">
                         <thead>
                             <tr>
                                 <th>#</th>

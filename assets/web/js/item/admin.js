@@ -76,10 +76,10 @@ function DeleteMachine(id){
                     console.log(data);
                     if(data.status == true){
                         box_alert.alertSuccess('BERHASIL INFO', data.messages);
-                        if ( $.fn.DataTable.isDataTable('#tblProdukKopi') ) {
-                            $('#tabelDataMesin').DataTable().destroy();
+                        if ( $.fn.DataTable.isDataTable('#tblDataMesin') ) {
+                            $('#tblDataMesin').DataTable().destroy();
                         }
-                        var tbl = config_tools.loadTableMaster('#tabelDataMesin', url_machine_list);
+                        var tbl = config_tools.loadTableMaster('#tblDataMesin', url_machine_list);
                     }
                     else{
                         box_alert.alertError('GAGAL INFO', data.messages);

@@ -1,5 +1,4 @@
 <form class="form-signin" role="form" action="index.html">
-    <h3 class="form-signin-heading">Silahkan Masuk</h3>
     <div class="form-group">
         <div class="input-group">
             <div class="input-group-addon">

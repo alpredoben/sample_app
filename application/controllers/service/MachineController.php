@@ -16,8 +16,8 @@ class MachineController extends Web_Environment {
     private function setInsertMachine($input)
     {
         return array(
-            'product_id'    => $input['id_produk'],
-            'product_name'  => $input['nama_produk'],
+            'machine_id'    => $input['id_mesin'],
+            'machine_name'  => $input['nama_mesin'],
             'status_data'   => 0,
             'create_date'   => date('Y-m-d H:i:s'), 
             'update_date'   => date('Y-m-d H:i:s')
@@ -27,12 +27,12 @@ class MachineController extends Web_Environment {
     private function setUpdateMachine($input)
     {
         return array(
-            'product_name'  => $input['nama_produk'],
+            'machine_name'  => $input['nama_mesin'],
             'update_date'   => date('Y-m-d H:i:s')
         ); 
     }
 
-    public function datatable_produk()
+    public function datatable_mesin()
     {
         if(isset($_POST['search']))
             $search = $_POST['search']['value'];
@@ -46,18 +46,18 @@ class MachineController extends Web_Environment {
         if(isset($_POST['start']))
             $start = $_POST['start'];
 
-        $record = $this->product_model->getDataTableProduct($search, $length, $start);
+        $record = $this->machine_model->getDataTableMachine($search, $length, $start);
         $dTable = array();
         $no = $start;
         foreach ($record as $item) {
             $no++;
-            $str = '<button type="button" id="btnUpdate" class="btn btn-success" onclick="EditProduct(\''.$item->product_id.'\')">Ubah</button> &nbsp;';
-            $str .= '<button type="button" id="btnHapus" class="btn btn-danger" onclick="DeleteProduct(\''.$item->product_id.'\')">Hapus</button>';
+            $str = '<button type="button" id="btnUpdate" class="btn btn-success" onclick="EditMachine(\''.$item->machine_id.'\')">Ubah</button> &nbsp;';
+            $str .= '<button type="button" id="btnHapus" class="btn btn-danger" onclick="DeleteMachine(\''.$item->machine_id.'\')">Hapus</button>';
 
             $dTable[] = array(
                 $no,
-                $item->product_id,
-                $item->product_name,
+                $item->machine_id,
+                $item->machine_name,
                 $item->create_date,
                 $item->update_date,
                 $str
@@ -67,72 +67,72 @@ class MachineController extends Web_Environment {
      
         $output = array(
             "draw"              => $draw,
-            "recordsTotal"      => $this->product_model->countRecordProduct(),
-            "recordsFiltered"   => $this->product_model->countFilterProduct($search),
+            "recordsTotal"      => $this->machine_model->countRecordMachine(),
+            "recordsFiltered"   => $this->machine_model->countFilterMachine($search),
             "data"              => $dTable,
         );
 
         echo json_encode($output);
     }
     
-    public function show_produk($product_id = '')
+    public function show_mesin($machine_id = '')
     {
-        if(empty($product_id))
-            $this->set_response(false, 'Data Produk Kosong');
+        if(empty($machine_id))
+            $this->set_response(false, 'Data mesin kosong');
 
-        $data = $this->product_model->getProductById($product_id);
+        $data = $this->machine_model->getMachineById($machine_id);
 
         if($data != false)
             $this->set_response(true, $data);
         else
-            $this->set_response(false, 'Data ID Produk '.$product_id.' kosong');
+            $this->set_response(false, 'Data ID Mesin '.$machine_id.' kosong');
     }
 
-    public function tambah_produk()
+    public function tambah_mesin()
     {
         $input = json_decode(file_get_contents('php://input'), true);
 
-        $bools = $this->product_model->checkRecordProductBy($input['id_produk'], $input['nama_produk']);
+        $bools = $this->machine_model->checkRecordMachineBy($input['id_mesin'], $input['nama_mesin']);
         
         if($bools == true)
         {
-            $this->set_response(false, 'Produk Kopi ['.$input['id_produk'].'] - '.$input['nama_produk']. ' sudah terdaftar dalam list');
+            $this->set_response(false, 'Data mesin ['.$input['id_mesin'].'] - '.$input['nama_mesin']. ' sudah terdaftar dalam list');
         }
         else
         {
-            $object = $this->setInsertProduct($input);
-            $insert = $this->product_model->insertProduct($object);
+            $object = $this->setInsertMachine($input);
+            $insert = $this->machine_model->insertMachine($object);
 
             if($insert==true){
-                $this->set_response(true,  'Tambah Produk Kopi ['.$input['id_produk'].'] - '.$input['nama_produk'].' Berhasil');
+                $this->set_response(true,  'Tambah data mesin ['.$input['id_mesin'].'] - '.$input['nama_mesin'].' Berhasil');
             }
             else{
-                $this->set_response(false, 'Tambah Produk Kopi ['.$input['id_produk'].'] - '.$input['nama_produk'].' Gagal');
+                $this->set_response(false, 'Tambah data mesin ['.$input['id_mesin'].'] - '.$input['nama_mesin'].' Gagal');
             }
         }
     }
 
-    public function ubah_produk()
+    public function ubah_mesin()
     {
         $input = json_decode(file_get_contents('php://input'), true);
 
-        $set_update = $this->setUpdateProduct($input);
-        $update = $this->product_model->updateProductById($input['id_produk'], $set_update);
+        $set_update = $this->setUpdateMachine($input);
+        $update = $this->machine_model->updateMachineById($input['id_mesin'], $set_update);
 
         if($update == true){
-            $this->set_response(true, 'Proses ubah data produk berhasil');
+            $this->set_response(true, 'Proses ubah data mesin berhasil');
         }
         else{
-            $this->set_response(false, 'Proses ubah data produk gagal');
+            $this->set_response(false, 'Proses ubah data mesin gagal');
         }
     }
 
-    public function hapus_produk($product_id='')
+    public function hapus_mesin($machine_id='')
     {
-        if(empty($product_id))
-            $this->set_response(false, 'Silahkan input id produk yang akan di hapus');
+        if(empty($machine_id))
+            $this->set_response(false, 'Silahkan input id mesin yang akan di hapus');
 
-        $delete = $this->product_model->removeProductById($product_id);
+        $delete = $this->machine_model->removeMachineById($machine_id);
 
         if($delete == true){
             $this->set_response(true, 'Data berhasil di hapus');
