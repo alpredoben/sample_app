@@ -3,6 +3,7 @@
 
 /** Admin Root Control */
 $route['admin']                     = 'admin/AdminController';
+$route['admin/keluar']              = 'admin/AdminController/logout';
 $route['admin/produk']              = 'admin/AdminController/view_produk';
 $route['admin/mesin']               = 'admin/AdminController/view_mesin';
 $route['admin/sparepart']           = 'admin/AdminController/view_sparepart';
@@ -30,6 +31,13 @@ $route['admin/sparepart/list/sparepart']           = 'service/SparepartControlle
 $route['admin/sparepart/show/sparepart/(:any)']    = 'service/SparepartController/show_sparepart/$1';
 $route['admin/sparepart/ubah/sparepart']           = 'service/SparepartController/ubah_sparepart';
 $route['admin/sparepart/hapus/sparepart/(:any)']   = 'service/SparepartController/hapus_sparepart/$1';
+
+
+
+/** SALES ROOT CONTROL */
+$route['sales']                     = 'sales/SalesController';
+$route['sales/keluar']              = 'sales/SalesController/logout';
+$route['sales/form_pemesanan']      = 'sales/SalesController/view_form_pemesanan';
 
 
 /** Login Validation */

@@ -17,16 +17,6 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        PEMBERITAHUAN <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#">Pesan Pemberitahuan</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 						<?php echo strtoupper($login_name) . ' ['. strtoupper($login_level) .']' ?>
                         <span class="caret"></span>
                     </a>
@@ -36,7 +26,7 @@
                         </li>
                         <li role="separator" class="divider"></li>
                         <li>
-                            <a href="<?php echo site_url('admin/keluar') ?>">Keluar</a>
+                            <a href="<?php echo site_url('sales/keluar') ?>">Keluar</a>
                         </li>
                     </ul>
                 </li>

@@ -74,7 +74,12 @@ class AdminController extends Web_Environment {
     }
 
     
-
+    public function logout()
+	{
+		$this->session->sess_destroy();
+		redirect('pages/login','refresh');
+		
+	}
 
     
 }

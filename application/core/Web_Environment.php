@@ -41,7 +41,7 @@ class Web_Environment extends CI_Controller
         return $this->output->set_content_type('application/json')->set_status_header($code)->set_output(json_encode($array));
     }
     
-
+    
 }
 
 /* End of file Web_Environment.php */

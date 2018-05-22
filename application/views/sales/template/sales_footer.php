@@ -16,7 +16,8 @@
 <script src="<?php echo base_url(); ?>assets/vendor/dataTable/js/jquery.dataTables.min.js"></script> 
 
 <script src="<?php echo base_url(); ?>assets/web/js/components.js"></script>
-<script src="<?php echo base_url(); ?>assets/web/js/item/admin.js"></script>
+<script src="<?php echo base_url(); ?>assets/web/js/item/sales.js"></script>
+
 <?php if(isset($scripts)){ ?> 
 <script src="<?php echo base_url().$scripts; ?>"></script>
 <?php } ?>
