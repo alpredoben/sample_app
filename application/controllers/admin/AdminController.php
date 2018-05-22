@@ -49,9 +49,27 @@ class AdminController extends Web_Environment {
     public function view_mesin()
     {
         $data = $this->get_default(); 
-        $data['subtitle'] = 'MASTER PRODUK MESIN';
+        $data['subtitle'] = 'MASTER DATA MESIN';
         $data['content']  = $this->root_adm . 'pages/admin_machine';
         $data['scripts']  = 'assets/web/js/item/machine.js';
+		$this->render('admin_layout', $data);
+    }
+
+    public function view_sparepart()
+    {
+        $data = $this->get_default(); 
+        $data['subtitle'] = 'MASTER DATA SPAREPART';
+        $data['content']  = $this->root_adm . 'pages/admin_sparepart';
+        $data['scripts']  = 'assets/web/js/item/sparepart.js';
+		$this->render('admin_layout', $data);
+    }
+
+    public function view_aktivitas_pesanan()
+    {
+        $data = $this->get_default(); 
+        $data['subtitle'] = 'MASTER DATA AKTIVITAS PEMESANAN';
+        $data['content']  = $this->root_adm . 'pages/admin_order_activate';
+        $data['scripts']  = 'assets/web/js/item/order_detail.js';
 		$this->render('admin_layout', $data);
     }
 

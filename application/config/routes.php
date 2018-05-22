@@ -2,9 +2,12 @@
 
 
 /** Admin Root Control */
-$route['admin'] = 'admin/AdminController';
-$route['admin/produk'] = 'admin/AdminController/view_produk';
-$route['admin/mesin']  = 'admin/AdminController/view_mesin';
+$route['admin']                     = 'admin/AdminController';
+$route['admin/produk']              = 'admin/AdminController/view_produk';
+$route['admin/mesin']               = 'admin/AdminController/view_mesin';
+$route['admin/sparepart']           = 'admin/AdminController/view_sparepart';
+$route['admin/aktivitas_pesanan']   = 'admin/AdminController/view_aktivitas_pesanan';
+
 
 /** Service Admin Product */
 $route['admin/produk/tambah/produk']       = 'service/ProductController/tambah_produk';
@@ -19,6 +22,15 @@ $route['admin/mesin/list/mesin']           = 'service/MachineController/datatabl
 $route['admin/mesin/show/mesin/(:any)']    = 'service/MachineController/show_mesin/$1';
 $route['admin/mesin/ubah/mesin']           = 'service/MachineController/ubah_mesin';
 $route['admin/mesin/hapus/mesin/(:any)']   = 'service/MachineController/hapus_mesin/$1';
+
+
+/** Service Sparepart Machine */
+$route['admin/sparepart/tambah/sparepart']         = 'service/SparepartController/tambah_sparepart';
+$route['admin/sparepart/list/sparepart']           = 'service/SparepartController/datatable_sparepart';
+$route['admin/sparepart/show/sparepart/(:any)']    = 'service/SparepartController/show_sparepart/$1';
+$route['admin/sparepart/ubah/sparepart']           = 'service/SparepartController/ubah_sparepart';
+$route['admin/sparepart/hapus/sparepart/(:any)']   = 'service/SparepartController/hapus_sparepart/$1';
+
 
 /** Login Validation */
 $route['user/login/validate'] = 'AuthController/login_validate';

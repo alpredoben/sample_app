@@ -7,14 +7,14 @@ $(document).ready(function () {
     var btnKembali = '#btnKembali';
     var myDataTables;
 
-    /** MASTER PRODUCT VARIABLE */
+    /** MASTER MACHINE VARIABLE */
     var btnSimpanMesin = '#btnSimpanMesin';
     var txtIDMesin     = '#txtIDMesin';
     var txtNamaMesin   = '#txtNamaMesin';
 
     myDataTables = config_tools.loadTableMaster('#tblDataMesin', url_machine_list);
 
-    /** EVENT MASTER PRODUCT */
+    /** EVENT MASTER MACHINE */
     $(btnKembali).hide();
 
     $(btnKembali).click(function (e) { 

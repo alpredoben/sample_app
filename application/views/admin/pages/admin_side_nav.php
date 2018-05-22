@@ -28,7 +28,7 @@
     </li>
 
     <li class="list-group-item">
-        <a href="<?php echo site_url('admin/news_approve'); ?>">
+        <a href="<?php echo site_url('admin/aktivitas_pesanan'); ?>">
             <i class="glyphicon glyphicon-level-up"></i> Aktivasi Detail Pemesanan</a>
     </li>
 </ul>
