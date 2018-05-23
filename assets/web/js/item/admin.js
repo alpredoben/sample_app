@@ -27,7 +27,7 @@ function DeleteProduct(id){
         title: 'HAPUS PRODUK!',
         content: 'Apakah anda yakin, ingin menghapus produk ini ?',
         theme:'modern',
-        type:'red',
+        type:'dark',
         buttons: {
             ya: function () {
                 $.getJSON(_url, function( data ) {
@@ -69,7 +69,7 @@ function DeleteMachine(id){
         title: 'HAPUS MESINs!',
         content: 'Apakah anda yakin, ingin menghapus data mesin ini ?',
         theme:'modern',
-        type:'red',
+        type:'dark',
         buttons: {
             ya: function () {
                 $.getJSON(_url, function( data ) {
@@ -111,7 +111,7 @@ function DeleteSparepart(id){
         title: 'HAPUS SPAREPART!',
         content: 'Apakah anda yakin, ingin menghapus data mesin ini ?',
         theme:'modern',
-        type:'red',
+        type:'dark',
         buttons: {
             ya: function () {
                 $.getJSON(_url, function( data ) {

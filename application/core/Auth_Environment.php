@@ -3,21 +3,11 @@
 class Auth_Environment extends CI_Controller {
 
     var $_container;
-    var $_modules;
-
-    protected $default_scripts;
-    protected $default_styles;
 
     public function __construct()
     {
         parent::__construct();
-        
         $this->_container = $this->config->item('auth_root');
-        
-        if($this->session->userdata('is_login') == true){
-            redirect(strtolower($this->session->userdata('level_name')), 'refresh');
-        }
-        
         log_message('debug', 'AuthenticObject : Login Layout');
     }
     

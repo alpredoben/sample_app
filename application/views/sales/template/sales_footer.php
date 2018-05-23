@@ -6,6 +6,7 @@
 
 <script>
     window.site_url = "<?php echo base_url(); ?>";
+    window.sess_all_data = <?php echo json_encode($this->session->all_userdata()); ?>
 </script>
 
 <script src="<?php echo base_url(); ?>assets/vendor/jquery/dist/jquery.min.js"></script>

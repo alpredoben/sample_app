@@ -1,22 +1,27 @@
 <?php  defined('BASEPATH') OR exit('No direct script access allowed');
 
-class SalesController extends Web_Environment {
+class SalesController extends Web_Environment 
+{
 
-    private $root_adm;
+    private $root_sales;
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->root_adm = $this->config->item(
-            strtolower($this->session->userdata('level_name')).'_root'
-        );
+        $this->load->library('session');
+    
+        if($this->session->has_userdata('is_login') && $this->session->userdata('is_login') == TRUE) {
+            $this->root_sales = $this->config->item(strtolower($this->session->userdata('nama_level_pengguna')).'_root');
+        }
+        else {
+            redirect('pages/login','refresh');
+        }
 
         $this->load->model(array(
             'product_model', 
             'machine_model',
             'sparepart_model',
-            'order_model'
         ));   
     }
     
@@ -25,9 +30,9 @@ class SalesController extends Web_Environment {
         return array(
             'title'       => 'PT. COFFINDO',
             'subtitle'    => '',
-            'login_level' => $this->session->userdata('level_name'),
-            'login_name'  => $this->session->userdata('username'),
-            'side_nav'    => $this->root_adm . 'pages/sales_side_nav',
+            'login_level' => $this->session->userdata('nama_level_pengguna'),
+            'login_name'  => $this->session->userdata('nama_pengguna'),
+            'side_nav'    => $this->root_sales . 'pages/sales_side_nav',
         );
     }
 
@@ -36,20 +41,35 @@ class SalesController extends Web_Environment {
     {
         $data = $this->get_default();
         $data['subtitle'] = 'SALES - DASHBOARD';
-        $data['content']  = $this->root_adm . 'pages/sales_dashboard';
-		$this->render('sales_layout', $data);
+        $data['content']  = $this->root_sales . 'pages/sales_dashboard';
+        $this->render($this->root_sales . 'sales_layout', $data);
     }
 
-    public function view_form_pemesanan()
+    public function view_form_penawaran()
     {
         $data = $this->get_default(); 
-        $data['subtitle'] = 'MASTER PRODUK KOPI';
-        $data['content']  = $this->root_adm . 'pages/sales_form_order';
+        $data['subtitle'] = 'DETAIL PENAWARAN ITEM';
+        $data['content']  = $this->root_sales . 'pages/sales_form_order';
         $data['scripts']  = 'assets/web/js/item/order.js';
-		$this->render('sales_layout', $data);
+		$this->render($this->root_sales . 'sales_layout', $data);
     }
 
-   
+    public function load_form_produk()
+    {
+        $data = array(
+            'produk_kopi' => $this->product_model->getAllProduct()
+        );
+        $this->load->view($this->root_sales . 'pages/sales_form_produk', $data);
+    }
+
+    public function load_form_mesin()
+    {
+        $data = array(
+            'daftar_mesin' => $this->machine_model->getAllMachine()
+        );
+        $this->load->view($this->root_sales . 'pages/sales_form_mesin', $data);
+    }
+
     public function logout()
 	{
 		$this->session->sess_destroy();

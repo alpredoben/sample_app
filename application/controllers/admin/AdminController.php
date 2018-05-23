@@ -8,13 +8,16 @@ class AdminController extends Web_Environment {
     {
         parent::__construct();
 
-        $this->root_adm = $this->config->item(
-            strtolower($this->session->userdata('level_name')).'_root'
-        );
-
-        $this->load->model(array(
-            'product_model'
-        ));   
+        $this->load->library('session');
+    
+        if($this->session->has_userdata('is_login') OR $this->session->userdata('is_login') == TRUE) {
+            $this->root_adm = $this->config->item(strtolower($this->session->userdata('nama_level_pengguna')).'_root');
+        }
+        else {
+            redirect('pages/login','refresh');
+        }
+        
+        $this->load->model(array('product_model'));   
     }
     
     public function get_default()
@@ -22,8 +25,8 @@ class AdminController extends Web_Environment {
         return array(
             'title'       => 'PT. COFFINDO',
             'subtitle'    => '',
-            'login_level' => $this->session->userdata('level_name'),
-            'login_name'  => $this->session->userdata('username'),
+            'login_level' => $this->session->userdata('nama_level_pengguna'),
+            'login_name'  => $this->session->userdata('nama_pengguna'),
             'side_nav'    => $this->root_adm . 'pages/admin_side_nav',
         );
     }
@@ -34,7 +37,7 @@ class AdminController extends Web_Environment {
         $data = $this->get_default();
         $data['subtitle'] = 'ADMIN - DASHBOARD';
         $data['content']  = $this->root_adm . 'pages/admin_dashboard';
-		$this->render('admin_layout', $data);
+		$this->render($this->root_adm . 'admin_layout', $data);
     }
 
     public function view_produk()
@@ -43,7 +46,7 @@ class AdminController extends Web_Environment {
         $data['subtitle'] = 'MASTER PRODUK KOPI';
         $data['content']  = $this->root_adm . 'pages/admin_product';
         $data['scripts']  = 'assets/web/js/item/product.js';
-		$this->render('admin_layout', $data);
+		$this->render($this->root_adm .'admin_layout', $data);
     }
 
     public function view_mesin()
@@ -52,7 +55,7 @@ class AdminController extends Web_Environment {
         $data['subtitle'] = 'MASTER DATA MESIN';
         $data['content']  = $this->root_adm . 'pages/admin_machine';
         $data['scripts']  = 'assets/web/js/item/machine.js';
-		$this->render('admin_layout', $data);
+		$this->render($this->root_adm . 'admin_layout', $data);
     }
 
     public function view_sparepart()
@@ -61,7 +64,7 @@ class AdminController extends Web_Environment {
         $data['subtitle'] = 'MASTER DATA SPAREPART';
         $data['content']  = $this->root_adm . 'pages/admin_sparepart';
         $data['scripts']  = 'assets/web/js/item/sparepart.js';
-		$this->render('admin_layout', $data);
+		$this->render($this->root_adm . 'admin_layout', $data);
     }
 
     public function view_aktivitas_pesanan()
@@ -70,7 +73,7 @@ class AdminController extends Web_Environment {
         $data['subtitle'] = 'MASTER DATA AKTIVITAS PEMESANAN';
         $data['content']  = $this->root_adm . 'pages/admin_order_activate';
         $data['scripts']  = 'assets/web/js/item/order_detail.js';
-		$this->render('admin_layout', $data);
+		$this->render($this->root_adm . 'admin_layout', $data);
     }
 
     

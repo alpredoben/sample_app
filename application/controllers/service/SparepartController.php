@@ -6,7 +6,7 @@ class SparepartController extends Web_Environment {
     {
         parent::__construct();
         date_default_timezone_set('Asia/Jakarta');
-        $this->root_adm = $this->config->item(strtolower($this->session->userdata('level_name')).'_root');
+        //$this->root_adm = $this->config->item(strtolower($this->session->userdata('level_name')).'_root');
 
         $this->load->model(array(
             'sparepart_model'

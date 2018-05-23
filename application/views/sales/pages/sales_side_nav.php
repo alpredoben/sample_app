@@ -10,13 +10,13 @@
         </a>
     </li>
     <li class="list-group-item">
-        <a href="<?php echo site_url('sales/form_pemesanan'); ?>">
-            <i class="glyphicon glyphicon-list-alt"></i> Form Pemesanan
+        <a href="<?php echo site_url('sales/form_penawaran'); ?>">
+            <i class="glyphicon glyphicon-list-alt"></i> Form Penawaran
         </a>
     </li>
     <li class="list-group-item">
         <a href="<?php echo site_url('sales/form_aktivasi'); ?>">
-            <i class="glyphicon glyphicon-level-up"></i> Persetujuan Aktivasi
+            <i class="glyphicon glyphicon-level-up"></i> Persetujuan Penawaran
         </a>
     </li>
 </ul>

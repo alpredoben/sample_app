@@ -74,11 +74,16 @@ class Product_model extends CI_Model {
 
 
     /** Get Product By Id */
-    public function getProductById($id)
+    public function getProductById($id = null)
     {
         $select = $this->db->where(array('status_data' => 0, 'product_id' => $id))->get($this->tbl_product);
         return ($select->num_rows() > 0) ? $select->result_array()[0] : false;
-        
+    }
+
+    public function getAllProduct()
+    {
+        $select = $this->db->where('status_data', 0)->get($this->tbl_product);
+        return ($select->num_rows() > 0) ? $select->result_array() : false;
     }
 
     public function updateProductById($id, $data)
@@ -92,6 +97,7 @@ class Product_model extends CI_Model {
         $delete = $this->db->set('status_data', 1)->where('product_id', $id)->update($this->tbl_product);
         return ($delete) ? true : false;
     }
+   
 
 }
 

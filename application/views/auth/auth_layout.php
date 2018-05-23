@@ -9,5 +9,6 @@
     $this->load->view($this->config->item("auth_root") . 'template/auth_content');
     $this->load->view($this->config->item("auth_root") . 'template/auth_footer');
 ?>
+
 </body>
 </html>

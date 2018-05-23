@@ -37,8 +37,21 @@ $route['admin/sparepart/hapus/sparepart/(:any)']   = 'service/SparepartControlle
 /** SALES ROOT CONTROL */
 $route['sales']                     = 'sales/SalesController';
 $route['sales/keluar']              = 'sales/SalesController/logout';
-$route['sales/form_pemesanan']      = 'sales/SalesController/view_form_pemesanan';
+$route['sales/form_penawaran']      = 'sales/SalesController/view_form_penawaran';
+$route['sales/load_form_produk']    = 'sales/SalesController/load_form_produk';
+$route['sales/load_form_mesin']     = 'sales/SalesController/load_form_mesin';
 
+
+/** Service Sales */
+$route['sales/penawaran/tambah/produk/kopi']     = 'service/OfferController/tambah_penawaran_produk';
+$route['sales/penawaran/datatable/produk/kopi']  = 'service/OfferController/datatable_penawaran_produk';
+$route['sales/penawaran/hapus/produk/kopi/(:any)'] = 'service/OfferController/hapus_penawaran_produk/$1';
+$route['sales/penawaran/set/wait/active/(:any)/(:any)'] = 'service/OfferController/set_wait_active/$1/$2';
+
+$route['sales/penawaran/tambah/mesin'] = 'service/OfferController/tambah_penawaran_mesin';
+$route['sales/penawaran/datatable/mesin'] = '';
+
+$route['sales/tampil/data/produk'] = 'service/ProductController/tampil_produk';
 
 /** Login Validation */
 $route['user/login/validate'] = 'AuthController/login_validate';

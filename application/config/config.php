@@ -326,7 +326,7 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = 'thu23456789#[n,';
 
 /*
 |--------------------------------------------------------------------------
@@ -524,14 +524,22 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
+// function __autoload($class)
+// {
+//     if (strpos($class, 'CI_') !== 0)
+//     {
+//         if (is_readable(APPPATH . 'core/' . $class . '.php'))
+//         {
+//             require_once(APPPATH . 'core/' . $class . '.php');
+//         }
+//     }
+// }
+
 function __autoload($class)
 {
-    if (strpos($class, 'CI_') !== 0)
+    if(strpos($class, 'CI_') !== 0)
     {
-        if (is_readable(APPPATH . 'core/' . $class . '.php'))
-        {
-            require_once(APPPATH . 'core/' . $class . '.php');
-        }
+        @include_once( APPPATH . 'core/'. $class . '.php' );
     }
 }
 

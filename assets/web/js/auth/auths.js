@@ -29,13 +29,13 @@ $(document).ready(function () {
                 if(status == false)
                 {
                     boxAlert.alertError('Login Gagal', messages);
+                    return false;
                 }
                 else{
-                    console.log(messages);
                     window.location.href = messages; 
                 }
-                
-                console.log(response);
+               
+                // console.log(response);
     
             }).catch(function (error) {
                 console.log(error);

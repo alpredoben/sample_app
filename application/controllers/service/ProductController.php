@@ -1,13 +1,12 @@
 <?php  defined('BASEPATH') OR exit('No direct script access allowed');
-
+session_start();
 class ProductController extends Web_Environment {
 
     public function __construct()
     {
         parent::__construct();
         date_default_timezone_set('Asia/Jakarta');
-        $this->root_adm = $this->config->item(strtolower($this->session->userdata('level_name')).'_root');
-
+    
         $this->load->model(array(
             'product_model'
         ));
@@ -75,6 +74,17 @@ class ProductController extends Web_Environment {
         echo json_encode($output);
     }
     
+    public function tampil_produk()
+    {
+        $product = $this->product_model->getAllProduct();
+        if($product != false){
+            $this->set_response(true, $product);
+        }
+        else{
+            $this->set_response(false, 'No Record Product List');
+        }
+    }
+
     public function show_produk($product_id = '')
     {
         if(empty($product_id))

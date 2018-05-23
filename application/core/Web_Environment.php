@@ -1,31 +1,16 @@
-<?php 
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php  defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Web_Environment extends CI_Controller 
 {
 
-    var $_construct;
-
-    
     public function __construct()
     {
         parent::__construct();
-
-        if($this->session->userdata('is_login') == true)
-        {
-            $this->_container = $this->config->item(strtolower($this->session->userdata('level_name')).'_root');
-        }
-        else{
-            redirect('pages/login', 'refresh');
-        }
     }
 
-    public function render($page='', $data)
+    public function render($_layout, $data)
     {
-        if($page == '')
-            $this->load->view($this->_container, $data);
-        else
-            $this->load->view($this->_container . $page, $data);
+        $this->load->view($_layout, $data);
     }
 
     public function set_response($status, $data=null, $optional=null, $code=200)
@@ -40,7 +25,6 @@ class Web_Environment extends CI_Controller
 
         return $this->output->set_content_type('application/json')->set_status_header($code)->set_output(json_encode($array));
     }
-    
     
 }
 

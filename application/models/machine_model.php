@@ -92,6 +92,12 @@ class Machine_model extends CI_Model {
         return ($delete) ? true : false;
     }
 
+    public function getAllMachine()
+    {
+        $select = $this->db->where('status_data', 0)->get($this->tbl_machine);
+        return ($select->num_rows() > 0) ? $select->result_array() : false;
+    }
+
 }
 
 /* End of file Machine_model.php */
