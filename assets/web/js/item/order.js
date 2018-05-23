@@ -3,19 +3,21 @@
 
 /** ######################## PRODUCT OFFER ################################## */
 
-/** Load Inisial Page Form Product Coffee */
 loadContentPage(window.site_url + 'sales/load_form_produk', pageFormsContent, detailPenawaranProduk); 
+
+/** ####################### @name PRODUCT_OFFER #################################### */
 
 function detailPenawaranProduk()
 {
 
     var _json_produk = {};
     var offerProductTable;
-
+    
+    
 
     $(document).ready(function () {
 
-        offerProductTable = config_tools.loadTableMaster('#tblPenawaranProduk', url_datatable_penawarn_kopi);
+        offerProductTable = config_tools.loadTableMaster('#tblPenawaranProduk', url_datatable_penawaran_kopi);
 
         /** Kuantitas Produk Kopi*/
         $(txtKuantitasKopi).blur(function (e) { 
@@ -92,8 +94,10 @@ function detailPenawaranProduk()
                 success: function (response) {
                     console.log(response);
 
-                    if(response.status == true)
+                    if(response.status == true){
                         box_alert.alertSuccess('Successfully', response.messages);
+                        offerProductTable.ajax.reload()
+                    }
                     else
                         box_alert.alertError('Failed', response.messages);
 
@@ -111,8 +115,7 @@ function detailPenawaranProduk()
 }
 
 
-/** ####################### MACHINE OFFER #################################### */
-/** Load Inisial page Form product Coffee */
+/** ####################### @name MACHINE_OFFER #################################### */
 
 function detailPenawaranMesin()
 {
@@ -121,7 +124,7 @@ function detailPenawaranMesin()
 
     $(document).ready(function () {
 
-        //offerMachineTable = config_tools.loadTableMaster('#tblPenawaranMesin', url_datatable_penawaran_machine);
+        offerMachineTable = config_tools.loadTableMaster('#tblPenawaranMesin', url_datatable_penawaran_machine);
 
         /** Kuantitas Produk Kopi*/
         $(txtKuantitasMesin).blur(function (e) { 
@@ -188,7 +191,7 @@ function detailPenawaranMesin()
     
             _json_mesin.id_mesin = $(optionMesin).val();
             _json_mesin.session_user_data = window.sess_all_data;
-
+            //tblPenawaranMesin
             $.ajax({
                 type: "post",
                 url: url_tambah_penawaran_mesin,
@@ -198,12 +201,120 @@ function detailPenawaranMesin()
                 success: function (response) {
                     console.log(response);
 
-                    if(response.status == true)
+                    if(response.status == true){
                         box_alert.alertSuccess('Successfully', response.messages);
+                        offerMachineTable.ajax.reload()
+                    }
+                        
                     else
                         box_alert.alertError('Failed', response.messages);
 
                     _json_mesin = {};
+                }
+            });
+
+        });
+    
+    });
+}
+
+
+
+/** ###################### @name SPAREPART_OFFER ################################ */
+
+function detailPenawaranSparepart()
+{
+    var _json_sparepart = {};
+    var offerSparepartTable;
+
+    $(document).ready(function () {
+
+        offerSparepartTable = config_tools.loadTableMaster('#tblPenawaranSparepart', url_datatable_penawaran_sparepart);
+
+        /** Kuantitas Produk Kopi*/
+        $(txtKuantitasSparepart).blur(function (e) { 
+            e.preventDefault();
+            _json_sparepart.kuantitas_sparepart = parseInt($(this).val());
+            $(this).val( config_tools.convertNumberToCurrency($(this).val()) )
+        });
+       
+
+        $(txtKuantitasSparepart).keydown(function (e) { 
+            config_tools.setOnlyNumberInputValue(e);
+        });
+
+        
+        /** Harga Produk Kopi */
+        $(txtHargaSparepart).blur(function (e) { 
+            e.preventDefault();
+            _json_sparepart.harga_sparepart = parseInt($(this).val());
+            $(this).val( config_tools.convertNumberToCurrency($(this).val()) )
+        });
+
+        $(txtHargaSparepart).keydown(function (e) { 
+            config_tools.setOnlyNumberInputValue(e);
+        });
+
+
+        /** Diskon Produk Kopi */
+        $(txtDiskonSparepart).blur(function (e) { 
+            e.preventDefault();
+            _json_sparepart.diskon_sparepart = parseInt($(this).val());
+        });
+       
+        $(txtDiskonSparepart).keydown(function (e) { 
+            config_tools.setOnlyNumberInputValue(e);
+        });
+
+        /** Tombol Simpan Produk Detail Kopi */
+        $(btnSubmitSparepart).click(function (e) { 
+            e.preventDefault();
+            var id_sparepart = $(optionSparepart).val();
+            var kuantitas_sparepart = $(txtKuantitasSparepart).val();
+            var harga_sparepart = $(txtHargaSparepart).val();
+            var diskon_sparepart = $(txtDiskonSparepart).val();
+    
+            if($(optionSparepart).val() == '-'){
+                box_alert.alertError(false, 'Silahkan pilih nama sparepart');
+                return false;
+            }
+
+            if($(txtKuantitasSparepart).val() == '' || $(txtKuantitasSparepart).val() == 0){
+                box_alert.alertError(false, 'Silahkan isi jumlah/kuantitas produk kopi pilihan');
+                return false;
+            }
+
+            if($(txtHargaSparepart).val() == '' || $(txtHargaSparepart).val() == 0){
+                box_alert.alertError(false, 'Silahkan isi harga penawaran sparepart pilihan');
+                return false;
+            }
+
+            if($(txtDiskonSparepart).val() == ''){
+                box_alert.alertError(false, 'Silahkan isi diskon harga penawaran sparepart pilihan');
+                return false;
+            }
+    
+            _json_sparepart.id_sparepart = $(optionSparepart).val();
+            _json_sparepart.session_user_data = window.sess_all_data;
+            
+            $.ajax({
+                type: "post",
+                url: url_tambah_penawaran_sparepart,
+                contentType: "application/json",
+                data: JSON.stringify({ input_sparepart : _json_sparepart }),
+                dataType: "json",
+                success: function (response) {
+                    console.log(response);
+
+                    if(response.status == true){
+                        box_alert.alertSuccess('Successfully', response.messages);
+                        offerSparepartTable.ajax.reload()
+                    }
+                        
+                    else
+                        box_alert.alertError('Failed', response.messages);
+
+                    _json_sparepart = {};
                 }
             });
 

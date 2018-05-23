@@ -40,7 +40,7 @@ $route['sales/keluar']              = 'sales/SalesController/logout';
 $route['sales/form_penawaran']      = 'sales/SalesController/view_form_penawaran';
 $route['sales/load_form_produk']    = 'sales/SalesController/load_form_produk';
 $route['sales/load_form_mesin']     = 'sales/SalesController/load_form_mesin';
-
+$route['sales/load_form_sparepart']     = 'sales/SalesController/load_form_sparepart';
 
 /** Service Sales */
 $route['sales/penawaran/tambah/produk/kopi']     = 'service/OfferController/tambah_penawaran_produk';
@@ -48,8 +48,15 @@ $route['sales/penawaran/datatable/produk/kopi']  = 'service/OfferController/data
 $route['sales/penawaran/hapus/produk/kopi/(:any)'] = 'service/OfferController/hapus_penawaran_produk/$1';
 $route['sales/penawaran/set/wait/active/(:any)/(:any)'] = 'service/OfferController/set_wait_active/$1/$2';
 
+/** Machine Offer Route */
 $route['sales/penawaran/tambah/mesin'] = 'service/OfferController/tambah_penawaran_mesin';
-$route['sales/penawaran/datatable/mesin'] = '';
+$route['sales/penawaran/datatable/mesin'] = 'service/OfferController/datatable_penawaran_mesin';
+$route['sales/penawaran/hapus/mesin/(:any)'] = 'service/OfferController/hapus_penawaran_mesin/$1';
+
+/** Sparepart Offer Route */ 
+$route['sales/penawaran/tambah/sparepart'] = 'service/OfferController/tambah_penawaran_sparepart';
+$route['sales/penawaran/datatable/sparepart'] = 'service/OfferController/datatable_penawaran_sparepart';
+$route['sales/penawaran/hapus/sparepart/(:any)'] = 'service/OfferController/hapus_penawaran_sparepart/$1';
 
 $route['sales/tampil/data/produk'] = 'service/ProductController/tampil_produk';
 

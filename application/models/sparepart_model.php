@@ -92,6 +92,12 @@ class Sparepart_model extends CI_Model {
         return ($delete) ? true : false;
     }
 
+    public function getAllSparepart()
+    {
+        $select = $this->db->where('status_data', 0)->get($this->tbl_sparepart);
+        return ($select->num_rows() > 0) ? $select->result_array() : false;
+    }
+
 }
 
 /* End of file Sparepart_model.php */

@@ -57,8 +57,8 @@
         <div class="panel-heading">
             <h3 class="panel-title">Tabel Detail Penawaran Kopi</h3>
         </div>
-        <div class="panel-body">
-            <table id="tblPenawaranProduk" class="display nowrap hover" style="width:100%">
+        <div class="panel-body table-responsive">
+            <table id="tblPenawaranProduk" class="table table-striped table-hover nowrap" style="width:100%">
                 <thead>
                     <tr>
                         <th>#</th>

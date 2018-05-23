@@ -70,6 +70,14 @@ class SalesController extends Web_Environment
         $this->load->view($this->root_sales . 'pages/sales_form_mesin', $data);
     }
 
+    public function load_form_sparepart()
+    {
+        $data = array(
+            'daftar_sparepart' => $this->sparepart_model->getAllSparepart()
+        );
+        $this->load->view($this->root_sales . 'pages/sales_form_sparepart', $data);
+    }
+
     public function logout()
 	{
 		$this->session->sess_destroy();
