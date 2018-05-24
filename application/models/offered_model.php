@@ -37,6 +37,27 @@ class Offered_model extends CI_Controller {
         return ($set_wait) ? true : false;
     }
 
+    public function getAllItemBy($item_name, $item_id)
+    {
+        $this->db->select('*');
+
+        switch ($item_name) {
+            case 'produk':
+                $this->db->from($this->tbl_product_offer)->where('product_offer_id',     $item_id);
+                break;
+                
+            case 'mesin':
+                $this->db->from($this->tbl_machine_offer)->where('machine_offer_id',     $item_id);
+                break;
+
+            default:
+                $this->db->from($this->tbl_sparepart_offer)->where('sparepart_offer_id', $item_id);
+                break;
+        }
+        //$this->db->where(array('active_id' => 4, 'status_data' => 0));
+        $select = $this->db->get();
+        return ($select->num_rows() > 0) ? $select->result_array()[0] : false;
+    }
     
 
     /** ################################## @var PRODUCT_OFFER ########################################## */

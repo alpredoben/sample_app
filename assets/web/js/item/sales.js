@@ -25,13 +25,33 @@ var url_set_active_penawaran        = window.site_url + 'sales/penawaran/set/wai
 
 /** Variable Page Form Content */
 var pageFormsContent = '#pageFormsContent';
+var btnKembali = '#btnKembali';
 
 /** Variable Product Coffee */
 var optionProdukKopi = '#optionProdukKopi',
     txtKuantitasKopi = '#txtKuantitasKopi',
     txtHargaKopi     = '#txtHargaKopi',
     txtDiskonKopi    = '#txtDiskonKopi',
-    btnSubmitKopi    = '#btnSubmitKopi';
+    btnSubmitKopi    = '#btnSubmitKopi',
+    tblPenawaranProduct = '#tblPenawaranProduct';
+
+/** Variable Machine Form */
+var optionMesin = '#optionMesin',
+    txtKuantitasMesin = '#txtKuantitasMesin',
+    txtHargaMesin = '#txtHargaMesin',
+    txtDiskonMesin = '#txtDiskonMesin',
+    btnSubmitMesin = '#btnSubmitMesin',
+    tblPenawaranMesin = '#tblPenawaranMesin';
+
+/** Variable Sparepart */
+var optionSparepart = '#optionSparepart',
+    txtKuantitasSparepart = '#txtKuantitasSparepart',
+    txtHargaSparepart = '#txtHargaSparepart',
+    txtDiskonSparepart = '#txtDiskonSparepart',
+    btnSubmitSparepart = '#btnSubmitSparepart',
+    tblPenawaranSparepart = '#tblPenawaranSparepart';
+
+
 
 /** Method Load Content Function */
 function loadContentPage(_path, _tools, methods) 
@@ -63,18 +83,18 @@ function UpToWaitActiveOffer(_offer_type, _offer_id){
                         box_alert.alertSuccess('BERHASIL INFO', data.messages);
                         var tbl;
     
-                        if ( $.fn.DataTable.isDataTable('#tblPenawaranProduk') ) {
-                            $('#tblPenawaranProduk').DataTable().destroy();
-                            tbl = config_tools.loadTableMaster('#tblPenawaranProduk', url_datatable_penawaran_kopi);
+                        if ( $.fn.DataTable.isDataTable(tblPenawaranProduk) ) {
+                            $(tblPenawaranProduk).DataTable().destroy();
+                            tbl = config_tools.loadTableMaster(tblPenawaranProduk, url_datatable_penawaran_kopi);
                         }
 
-                        if ( $.fn.DataTable.isDataTable('#tblPenawaranMesin') ) {
-                            $('#tblPenawaranMesin').DataTable().destroy();
-                            tbl = config_tools.loadTableMaster('#tblPenawaranMesin', url_datatable_penawaran_machine);
+                        if ( $.fn.DataTable.isDataTable(tblPenawaranMesin) ) {
+                            $(tblPenawaranMesin).DataTable().destroy();
+                            tbl = config_tools.loadTableMaster(tblPenawaranMesin, url_datatable_penawaran_machine);
                         }
-                        if ( $.fn.DataTable.isDataTable('#tblPenawaranSparepart') ) {
-                            $('#tblPenawaranSparepart').DataTable().destroy();
-                            tbl = config_tools.loadTableMaster('#tblPenawaranSparepart', url_datatable_penawaran_sparepart);
+                        if ( $.fn.DataTable.isDataTable(tblPenawaranSparepart) ) {
+                            $(tblPenawaranSparepart).DataTable().destroy();
+                            tbl = config_tools.loadTableMaster(tblPenawaranSparepart, url_datatable_penawaran_sparepart);
                         }
                     }
                     else{
@@ -105,10 +125,6 @@ function getLoadFormOffer(_type_name, _elements){
 
 
 /** ########################################## @name PRODUCT_OFFER ############################################### */
-/** Update and Delete Product Offer */
-function EditProductOffer(_offer_id) { 
-}
-
 function DeleteProductOffer(_offer_id){
     var _url = url_hapus_penawaran_kopi + '/' + _offer_id;
 
@@ -125,9 +141,9 @@ function DeleteProductOffer(_offer_id){
                         box_alert.alertSuccess('BERHASIL INFO', data.messages);
                         var tbl;
 
-                        if ( $.fn.DataTable.isDataTable('#tblPenawaranProduk') ) {
-                            $('#tblPenawaranProduk').DataTable().destroy();
-                            tbl = config_tools.loadTableMaster('#tblPenawaranProduk', url_datatable_penawaran_kopi);
+                        if ( $.fn.DataTable.isDataTable(tblPenawaranProduk) ) {
+                            $(tblPenawaranProduk).DataTable().destroy();
+                            tbl = config_tools.loadTableMaster(tblPenawaranProduk, url_datatable_penawaran_kopi);
                         }
                          
                     }
@@ -141,10 +157,7 @@ function DeleteProductOffer(_offer_id){
     });
 }
 
-
-
 /** ########################################### @name MACHINE_OFFER ########################################### */
-/** Update and Delete Machine Offer */
 function DeleteMachineOffer(_offer_id){
     var _url = url_hapus_penawaran_machine + '/' + _offer_id;
 
@@ -161,9 +174,9 @@ function DeleteMachineOffer(_offer_id){
                         box_alert.alertSuccess('BERHASIL INFO', data.messages);
                         var tbl;
 
-                        if ( $.fn.DataTable.isDataTable('#tblPenawaranMesin') ) {
-                            $('#tblPenawaranMesin').DataTable().destroy();
-                            tbl = config_tools.loadTableMaster('#tblPenawaranMesin', url_datatable_penawaran_machine);
+                        if ( $.fn.DataTable.isDataTable(tblPenawaranMesin) ) {
+                            $(tblPenawaranMesin).DataTable().destroy();
+                            tbl = config_tools.loadTableMaster(tblPenawaranMesin, url_datatable_penawaran_machine);
                         }
                         
                     }
@@ -177,10 +190,7 @@ function DeleteMachineOffer(_offer_id){
     });
 }
 
-
-
 /** ########################################### @name SPAREPART_OFFER ########################################### */
-/** Update and Delete Sparepart Offer */
 function DeleteSparepartOffer(_offer_id){
     var _url = url_hapus_penawaran_sparepart + '/' + _offer_id;
 
@@ -197,9 +207,9 @@ function DeleteSparepartOffer(_offer_id){
                         box_alert.alertSuccess('BERHASIL INFO', data.messages);
                         var tbl;
 
-                        if ( $.fn.DataTable.isDataTable('#tblPenawaranSparepart') ) {
-                            $('#tblPenawaranSparepart').DataTable().destroy();
-                            tbl = config_tools.loadTableMaster('#tblPenawaranSparepart', url_datatable_penawaran_sparepart);
+                        if ( $.fn.DataTable.isDataTable(tblPenawaranSparepart) ) {
+                            $(tblPenawaranSparepart).DataTable().destroy();
+                            tbl = config_tools.loadTableMaster(tblPenawaranSparepart, url_datatable_penawaran_sparepart);
                         }
                          
                     }
@@ -213,3 +223,47 @@ function DeleteSparepartOffer(_offer_id){
     });
 }
 
+
+function EditOfferItem(_offer_item, _offer_id)
+{
+    var _url = window.site_url + 'sales/penawaran/tampil/item/'+_offer_item.toLowerCase() + '/by/' + _offer_id;
+
+    $.getJSON(_url, 
+        function( data ) {
+            var _edit = data.messages;
+            var _status = data.status;
+
+            if(_status == true){
+
+                if(_offer_item == 'produk'){
+                    $(optionProdukKopi).val(_edit.product_code);
+                    $(optionProdukKopi).prop('disabled', true);
+                    $(txtKuantitasKopi).val(_edit.quantity);
+                    $(txtHargaKopi).val(_edit.product_price);
+                    $(txtDiskonKopi).val(_edit.discount);
+                    $(btnSubmitKopi).text('Update');
+                }
+
+                if(_offer_item == 'mesin'){
+                    $(optionMesin).val(_edit.machine_code);
+                    $(optionMesin).prop('disabled', true);
+                    $(txtKuantitasMesin).val(_edit.quantity);
+                    $(txtHargaMesin).val(_edit.machine_price);
+                    $(txtDiskonMesin).val(_edit.discount);
+                    $(btnSubmitMesin).text('Update');
+                }
+
+                if(_offer_item == 'sparepart'){
+                    $(optionSparepart).val(_edit.sparepart_code);
+                    $(optionSparepart).prop('disabled', true);
+                    $(txtKuantitasSparepart).val(_edit.quantity);
+                    $(txtHargaSparepart).val(_edit.sparepart_price);
+                    $(txtDiskonSparepart).val(_edit.discount);
+                    $(btnSubmitSparepart).text('Update');
+                }
+                $(btnKembali).show();
+            }
+            console.log(_edit);
+        }
+    );
+}

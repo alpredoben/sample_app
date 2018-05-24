@@ -13,11 +13,17 @@ function detailPenawaranProduk()
     var _json_produk = {};
     var offerProductTable;
     
-    
+    $(btnKembali).hide();
 
     $(document).ready(function () {
 
         offerProductTable = config_tools.loadTableMaster('#tblPenawaranProduk', url_datatable_penawaran_kopi);
+
+        $(btnKembali).click(function (e) { 
+            e.preventDefault();
+            config_tools.loadLocationWindow();
+        });
+
 
         /** Kuantitas Produk Kopi*/
         $(txtKuantitasKopi).blur(function (e) { 
@@ -61,7 +67,8 @@ function detailPenawaranProduk()
             var kuantitas_produk = $(txtKuantitasKopi).val();
             var harga_produk = $(txtHargaKopi).val();
             var diskon_produk = $(txtDiskonKopi).val();
-    
+            var text_button = $(btnSubmitKopi).text();
+
             if($(optionProdukKopi).val() == '-'){
                 box_alert.alertError(false, 'Silahkan pilih nama produk kopi');
                 return false;
@@ -82,28 +89,38 @@ function detailPenawaranProduk()
                 return false;
             }
     
-            _json_produk.id_produk = $(optionProdukKopi).val();
-            _json_produk.session_user_data = window.sess_all_data;
 
-            $.ajax({
-                type: "post",
-                url: url_tambah_penawaran_kopi,
-                contentType: "application/json",
-                data: JSON.stringify({ input_produk : _json_produk }),
-                dataType: "json",
-                success: function (response) {
-                    console.log(response);
+            if(text_button.toLowerCase() == 'update'){
 
-                    if(response.status == true){
-                        box_alert.alertSuccess('Successfully', response.messages);
-                        offerProductTable.ajax.reload()
+            }
+            else{
+                _json_produk.id_produk = $(optionProdukKopi).val();
+                _json_produk.session_user_data = window.sess_all_data;
+
+                $.ajax({
+                    type: "post",
+                    url: url_tambah_penawaran_kopi,
+                    contentType: "application/json",
+                    data: JSON.stringify({ input_produk : _json_produk }),
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response);
+
+                        if(response.status == true){
+                            box_alert.alertSuccess('Successfully', response.messages);
+                            offerProductTable.ajax.reload()
+                        }
+                        else
+                            box_alert.alertError('Failed', response.messages);
+
+                        _json_produk = {};
                     }
-                    else
-                        box_alert.alertError('Failed', response.messages);
+                });
+            }
 
-                    _json_produk = {};
-                }
-            });
+
+
+            
 
        
 
@@ -121,10 +138,18 @@ function detailPenawaranMesin()
 {
     var _json_mesin = {};
     var offerMachineTable;
+    
+    $(btnKembali).hide();
 
     $(document).ready(function () {
 
         offerMachineTable = config_tools.loadTableMaster('#tblPenawaranMesin', url_datatable_penawaran_machine);
+
+        $(btnKembali).click(function (e) { 
+            e.preventDefault();
+            config_tools.loadLocationWindow();
+        });
+
 
         /** Kuantitas Produk Kopi*/
         $(txtKuantitasMesin).blur(function (e) { 
@@ -168,7 +193,8 @@ function detailPenawaranMesin()
             var kuantitas_mesin = $(txtKuantitasMesin).val();
             var harga_mesin = $(txtHargaMesin).val();
             var diskon_mesin = $(txtDiskonMesin).val();
-    
+            var text_button = $(btnSubmitMesin).text();
+
             if($(optionMesin).val() == '-'){
                 box_alert.alertError(false, 'Silahkan pilih nama mesin');
                 return false;
@@ -189,29 +215,36 @@ function detailPenawaranMesin()
                 return false;
             }
     
-            _json_mesin.id_mesin = $(optionMesin).val();
-            _json_mesin.session_user_data = window.sess_all_data;
-            //tblPenawaranMesin
-            $.ajax({
-                type: "post",
-                url: url_tambah_penawaran_mesin,
-                contentType: "application/json",
-                data: JSON.stringify({ input_mesin : _json_mesin }),
-                dataType: "json",
-                success: function (response) {
-                    console.log(response);
+            if(text_button.toLowerCase() == 'update'){
 
-                    if(response.status == true){
-                        box_alert.alertSuccess('Successfully', response.messages);
-                        offerMachineTable.ajax.reload()
+
+            }
+            else{
+                _json_mesin.id_mesin = $(optionMesin).val();
+                _json_mesin.session_user_data = window.sess_all_data;
+                //tblPenawaranMesin
+                $.ajax({
+                    type: "post",
+                    url: url_tambah_penawaran_mesin,
+                    contentType: "application/json",
+                    data: JSON.stringify({ input_mesin : _json_mesin }),
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response);
+
+                        if(response.status == true){
+                            box_alert.alertSuccess('Successfully', response.messages);
+                            offerMachineTable.ajax.reload()
+                        }
+                            
+                        else
+                            box_alert.alertError('Failed', response.messages);
+
+                        _json_mesin = {};
                     }
-                        
-                    else
-                        box_alert.alertError('Failed', response.messages);
+                });
 
-                    _json_mesin = {};
-                }
-            });
+            }
 
         });
     
@@ -227,9 +260,16 @@ function detailPenawaranSparepart()
     var _json_sparepart = {};
     var offerSparepartTable;
 
+    $(btnKembali).hide();
+
     $(document).ready(function () {
 
         offerSparepartTable = config_tools.loadTableMaster('#tblPenawaranSparepart', url_datatable_penawaran_sparepart);
+
+        $(btnKembali).click(function (e) { 
+            e.preventDefault();
+            config_tools.loadLocationWindow();
+        });
 
         /** Kuantitas Produk Kopi*/
         $(txtKuantitasSparepart).blur(function (e) { 
@@ -273,7 +313,8 @@ function detailPenawaranSparepart()
             var kuantitas_sparepart = $(txtKuantitasSparepart).val();
             var harga_sparepart = $(txtHargaSparepart).val();
             var diskon_sparepart = $(txtDiskonSparepart).val();
-    
+            var text_button = $(btnSubmitSparepart).val();
+
             if($(optionSparepart).val() == '-'){
                 box_alert.alertError(false, 'Silahkan pilih nama sparepart');
                 return false;
@@ -294,29 +335,37 @@ function detailPenawaranSparepart()
                 return false;
             }
     
-            _json_sparepart.id_sparepart = $(optionSparepart).val();
-            _json_sparepart.session_user_data = window.sess_all_data;
-            
-            $.ajax({
-                type: "post",
-                url: url_tambah_penawaran_sparepart,
-                contentType: "application/json",
-                data: JSON.stringify({ input_sparepart : _json_sparepart }),
-                dataType: "json",
-                success: function (response) {
-                    console.log(response);
+            if(text_button.toLowerCase() == 'update'){
 
-                    if(response.status == true){
-                        box_alert.alertSuccess('Successfully', response.messages);
-                        offerSparepartTable.ajax.reload()
+
+            }
+            else{
+
+                _json_sparepart.id_sparepart = $(optionSparepart).val();
+                _json_sparepart.session_user_data = window.sess_all_data;
+                
+                $.ajax({
+                    type: "post",
+                    url: url_tambah_penawaran_sparepart,
+                    contentType: "application/json",
+                    data: JSON.stringify({ input_sparepart : _json_sparepart }),
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response);
+
+                        if(response.status == true){
+                            box_alert.alertSuccess('Successfully', response.messages);
+                            offerSparepartTable.ajax.reload()
+                        }
+                            
+                        else
+                            box_alert.alertError('Failed', response.messages);
+
+                        _json_sparepart = {};
                     }
-                        
-                    else
-                        box_alert.alertError('Failed', response.messages);
-
-                    _json_sparepart = {};
-                }
-            });
+                });
+                
+            }
 
         });
     

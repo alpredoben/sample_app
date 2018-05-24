@@ -33,6 +33,20 @@ class OfferController extends Web_Environment
        
     }
 
+    /** ### DEFAULT SHOW ITEM BY ITEM NAME AND ID */
+    public function tampil_items($item_name, $item_id)
+    {
+        if(empty($item_id))
+            $this->set_response(false, 'ID Item pilihan kosong');
+
+        $data = $this->offered_model->getAllItemBy($item_name, $item_id);
+
+        if($data != false)
+            $this->set_response(true, $data);
+        else
+            $this->set_response(false, 'Data dengan ID Item '.$item.' kosong');
+    }
+
 
     /** ##################### ALL EVENT METHOD PRODUCT OFFER ################################## */
     private function set_insert_offer_product($input)
@@ -99,7 +113,7 @@ class OfferController extends Web_Environment
         $no = $start;
         foreach ($record as $item) {
             $no++;
-            $str = '<button type="button" id="btnUpdateOffer" class="btn btn-primary" onclick="EditProductOffer(\''.$item->product_offer_id.'\')">Ubah</button> &nbsp;';
+            $str = '<button type="button" id="btnUpdateOffer" class="btn btn-primary" onclick="EditOfferItem(\'produk\',\''.$item->product_offer_id.'\')">Ubah</button> &nbsp;';
 
             $str .= '<button type="button" id="btnWaitActive" class="btn btn-success" onclick="UpToWaitActiveOffer(\'produk\',\''.$item->product_offer_id.'\')">Set Active</button> &nbsp;';
 
@@ -203,7 +217,7 @@ class OfferController extends Web_Environment
         $no = $start;
         foreach ($record as $item) {
             $no++;
-            $str = '<button type="button" id="btnUpdateOffer" class="btn btn-primary" onclick="EditMachineOffer(\''.$item->machine_offer_id.'\')">Ubah</button> &nbsp;';
+            $str = '<button type="button" id="btnUpdateOffer" class="btn btn-primary" onclick="EditOfferItem(\'mesin\',\''.$item->machine_offer_id.'\')">Ubah</button> &nbsp;';
 
             $str .= '<button type="button" id="btnWaitActive" class="btn btn-success" onclick="UpToWaitActiveOffer(\'mesin\',\''.$item->machine_offer_id.'\')">Set Active</button> &nbsp;';
 
@@ -306,7 +320,7 @@ class OfferController extends Web_Environment
         $no = $start;
         foreach ($record as $item) {
             $no++;
-            $str = '<button type="button" id="btnUpdateOffer" class="btn btn-primary" onclick="EditSparepartOffer(\''.$item->sparepart_offer_id.'\')">Ubah</button> &nbsp;';
+            $str = '<button type="button" id="btnUpdateOffer" class="btn btn-primary" onclick="EditOfferItem(\'sparepart\',\''.$item->sparepart_offer_id.'\')">Ubah</button> &nbsp;';
 
             $str .= '<button type="button" id="btnWaitActive" class="btn btn-success" onclick="UpToWaitActiveOffer(\'sparepart\',\''.$item->sparepart_offer_id.'\')">Set Active</button> &nbsp;';
 

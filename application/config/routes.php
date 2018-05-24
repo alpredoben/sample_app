@@ -57,6 +57,8 @@ $route['sales/penawaran/hapus/mesin/(:any)'] = 'service/OfferController/hapus_pe
 $route['sales/penawaran/tambah/sparepart'] = 'service/OfferController/tambah_penawaran_sparepart';
 $route['sales/penawaran/datatable/sparepart'] = 'service/OfferController/datatable_penawaran_sparepart';
 $route['sales/penawaran/hapus/sparepart/(:any)'] = 'service/OfferController/hapus_penawaran_sparepart/$1';
+//sales/penawaran/tampil/item/produk/by/1
+$route['sales/penawaran/tampil/item/(:any)/by/(:any)'] = 'service/OfferController/tampil_items/$1/$2';
 
 $route['sales/tampil/data/produk'] = 'service/ProductController/tampil_produk';
 
