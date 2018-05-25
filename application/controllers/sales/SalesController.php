@@ -19,9 +19,8 @@ class SalesController extends Web_Environment
         }
 
         $this->load->model(array(
-            'product_model', 
-            'machine_model',
-            'sparepart_model',
+            'items_model',
+            'penawaran_model'
         ));   
     }
     
@@ -37,7 +36,7 @@ class SalesController extends Web_Environment
     }
 
     /** View Data */
-    public function index()
+    public function dashboard()
     {
         $data = $this->get_default();
         $data['subtitle'] = 'SALES - DASHBOARD';
@@ -45,14 +44,28 @@ class SalesController extends Web_Environment
         $this->render($this->root_sales . 'sales_layout', $data);
     }
 
-    public function view_form_penawaran()
+    public function view_master_penawaran()
     {
         $data = $this->get_default(); 
-        $data['subtitle'] = 'DETAIL PENAWARAN ITEM';
-        $data['content']  = $this->root_sales . 'pages/sales_form_order';
-        $data['scripts']  = 'assets/web/js/item/order.js';
+        $data['subtitle'] = 'ITEM PENJUALAN';
+        $data['content']  = $this->root_sales . 'pages/master_penawaran_template';
+        $data['scripts']  = 'assets/web/js/sales/master_penawaran.js';
 		$this->render($this->root_sales . 'sales_layout', $data);
     }
+
+    public function load_master_penawaran($type_item)
+    {
+        $data = array(
+            'title_form_order'  => 'MASTER PENAWARAN ITEM '. strtoupper($type_item),
+            'title_table_order' => 'TABEL DETAIL PENAWARAN ITEM '. strtoupper($type_item),
+            'data_items'   => $this->items_model->get_list_item_by(getCategoryId($type_item))
+        );
+        
+        $this->load->view($this->root_sales . 'pages/sales_master_penawaran', $data);
+    }
+
+
+
 
     public function load_form_produk()
     {

@@ -15,9 +15,7 @@ class AdminController extends Web_Environment {
         }
         else {
             redirect('pages/login','refresh');
-        }
-        
-        $this->load->model(array('product_model'));   
+        } 
     }
     
     public function get_default()
@@ -32,7 +30,7 @@ class AdminController extends Web_Environment {
     }
 
     /** View Data */
-    public function index()
+    public function dashboard()
     {
         $data = $this->get_default();
         $data['subtitle'] = 'ADMIN - DASHBOARD';
@@ -40,44 +38,47 @@ class AdminController extends Web_Environment {
 		$this->render($this->root_adm . 'admin_layout', $data);
     }
 
-    public function view_produk()
+    public function view_master_item_kopi()
     {
         $data = $this->get_default(); 
-        $data['subtitle'] = 'MASTER PRODUK KOPI';
-        $data['content']  = $this->root_adm . 'pages/admin_product';
-        $data['scripts']  = 'assets/web/js/item/product.js';
+        $data['subtitle'] = 'MASTER ITEM KOPI';
+        $data['nama_item'] = 'Kopi';
+        $data['content']  = $this->root_adm . 'pages/admin_master_item';
+        $data['scripts']  = 'assets/web/js/adm/master_items.js';
 		$this->render($this->root_adm .'admin_layout', $data);
     }
 
-    public function view_mesin()
+    public function view_master_item_mesin()
     {
         $data = $this->get_default(); 
         $data['subtitle'] = 'MASTER DATA MESIN';
-        $data['content']  = $this->root_adm . 'pages/admin_machine';
-        $data['scripts']  = 'assets/web/js/item/machine.js';
+        $data['nama_item'] = 'Mesin';
+        $data['content']  = $this->root_adm . 'pages/admin_master_item';
+        $data['scripts']  = 'assets/web/js/adm/master_items.js';
 		$this->render($this->root_adm . 'admin_layout', $data);
     }
 
-    public function view_sparepart()
+    public function view_master_item_sparepart()
     {
         $data = $this->get_default(); 
-        $data['subtitle'] = 'MASTER DATA SPAREPART';
-        $data['content']  = $this->root_adm . 'pages/admin_sparepart';
-        $data['scripts']  = 'assets/web/js/item/sparepart.js';
+        $data['subtitle']  = 'MASTER DATA SPAREPART';
+        $data['nama_item'] = 'Mesin';
+        $data['content']   = $this->root_adm . 'pages/admin_sparepart';
+        $data['scripts']   = 'assets/web/js/adm/master_items.js';
 		$this->render($this->root_adm . 'admin_layout', $data);
     }
 
     public function view_aktivitas_pesanan()
     {
-        $data = $this->get_default(); 
-        $data['subtitle'] = 'MASTER DATA AKTIVITAS PEMESANAN';
-        $data['content']  = $this->root_adm . 'pages/admin_order_activate';
-        $data['scripts']  = 'assets/web/js/item/order_detail.js';
-		$this->render($this->root_adm . 'admin_layout', $data);
+        // $data = $this->get_default(); 
+        // $data['subtitle'] = 'MASTER DATA AKTIVITAS PEMESANAN';
+        // $data['content']  = $this->root_adm . 'pages/admin_order_activate';
+        // $data['scripts']  = 'assets/web/js/item/order_detail.js';
+		// $this->render($this->root_adm . 'admin_layout', $data);
     }
 
     
-    public function logout()
+    public function keluar()
 	{
 		$this->session->sess_destroy();
 		redirect('pages/login','refresh');

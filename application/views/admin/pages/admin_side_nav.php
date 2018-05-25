@@ -10,19 +10,19 @@
         </a>
     </li>
     <li class="list-group-item">
-        <a href="<?php echo site_url('admin/produk'); ?>">
+        <a href="<?php echo site_url('admin/master/item/kopi'); ?>">
             <i class="glyphicon glyphicon-list-alt"></i> Master Kopi
         </a>
     </li>
 
     <li class="list-group-item">
-        <a href="<?php echo site_url('admin/mesin'); ?>">
+        <a href="<?php echo site_url('admin/master/item/mesin'); ?>">
             <i class="glyphicon glyphicon-list-alt"></i> Master Mesin
         </a>
     </li>
 
     <li class="list-group-item">
-        <a href="<?php echo site_url('admin/sparepart'); ?>">
+        <a href="<?php echo site_url('admin/master/item/sparepart'); ?>">
             <i class="glyphicon glyphicon-list-alt"></i> Master Sparepart
         </a>
     </li>

@@ -9,7 +9,7 @@ class AuthController extends Auth_Environment
 		$this->load->library('session');
 		
 		if($this->session->userdata('is_login') == true){
-            redirect(strtolower($this->session->userdata('nama_level_pengguna')), 'refresh');
+            redirect(strtolower($this->session->userdata('nama_level_pengguna')).'/dashboard', 'refresh');
         }
 		
 		$this->load->model('user_model');
@@ -44,7 +44,7 @@ class AuthController extends Auth_Environment
 
 			$this->session->set_userdata( $sess_data );
 			
-			$this->set_response( true,  base_url(). strtolower($sess_data['nama_level_pengguna']));
+			$this->set_response( true,  base_url(). strtolower($sess_data['nama_level_pengguna']).'/dashboard' );
 		}
 		else{
 			$this->set_response(false, 'ID dan Password User Tidak Valid. Mohon Periksa Kembali');

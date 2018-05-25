@@ -1,0 +1,110 @@
+'use strict'
+
+/** ######################  @name DEFINE_VARIABLE_CLASS ############################# */
+var box_alert = new BoxAlertInformation();
+var config_tools = new ConfigTools();
+
+/** ##################### @name DEFINE_VARIABLE_ROUTE_URL ########################### */
+var url_master_penawaran        = 'sales/master/penawaran/item/';
+var url_insert_penawaran        = 'sales/master/penawaran/insert/item/';
+var url_update_active_penawaran = 'sales/master/penawaran/update/activate/item/';
+var url_datatable_penawaran     = 'sales/master/penawaran/datatable/item/';
+var url_delete_penawaran        = 'sales/master/penawaran/delete/item/';
+
+/** ####################  @name DEFINE_VARIABLE_ELEMENT_HTML ####################### */
+var optionItemName      = '#optionItemName',
+    txtKuantitasItem    = '#txtKuantitasItem',
+    txtHargaItem        = '#txtHargaItem',
+    txtDiskonItem       = '#txtDiskonItem',
+    btnSubmitItem       = '#btnSubmitItem',
+    btnKembali          = '#btnKembali',
+    tblMasterPenawaran  = '#tblMasterPenawaran',
+    pageFormsContent    = '#pageFormsContent',
+    segment_item        = '';    
+
+
+
+/** ####################  @name LOAD_CONTENT_PAGE_METHOD ####################### */
+function getLoadMasterPenawaran(_type_name, _elements){
+    var _path = window.site_url + url_master_penawaran + '/' + _type_name.toLowerCase();  
+
+    $.ajax({
+        url: _path,
+        success: function(response){
+            $(_elements).empty();
+            $(_elements).html(response);
+            masterPenawaranMethod( _type_name.toLowerCase() );
+        }
+    });
+}
+
+
+/** ####################### @name METHOD_ACTIVITIES_OFFER ################# */
+
+function UpdateActivatePenawaran(_type_name, id){
+    var _url = url_update_active_penawaran + _type_name.toLowerCase() + '/by/' + id;
+
+    $.confirm({
+        title: 'SET WAIT PENAWARAN!',
+        content: 'Anda ingin mengajukan aktivasi penawaran data ini?',
+        theme:'modern',
+        type:'dark',
+        buttons: {
+            ya: function () {
+                $.getJSON(_url, function( data ) {
+                    
+                    if(data.status == true){
+                        box_alert.alertSuccess('BERHASIL INFO', data.messages);
+                        var tbl;
+    
+                        if ( $.fn.DataTable.isDataTable(tblMasterPenawaran) ) {
+                            $(tblMasterPenawaran).DataTable().destroy();
+                            tbl = config_tools.loadTableMaster(
+                                tblMasterPenawaran, url_datatable_penawaran + _type_name.toLowerCase()
+                            );
+                        }
+                    }
+                    else{
+                        box_alert.alertError('GAGAL INFO', data.messages);
+                    }
+                });
+            },
+            tidak: function(){}
+        }
+    });
+}
+
+
+function DeleteItemPenawaran(_type_name, id){
+    var _url = url_delete_penawaran + _type_name.toLowerCase() + '/by/' + id;
+
+    $.confirm({
+        title: 'HAPUS DATA ',
+        content: 'Apakah anda yakin, ingin menghapus data ini ?',
+        theme:'modern',
+        type:'dark',
+        buttons: {
+            ya: function () {
+                $.getJSON(_url, function( data ) {
+                    console.log(data);
+                    if(data.status == true){
+                        box_alert.alertSuccess('BERHASIL INFO', data.messages);
+                        var tbl;
+
+                        if ( $.fn.DataTable.isDataTable(tblMasterPenawaran) ) {
+                            $(tblPenawaranProduk).DataTable().destroy();
+                            tbl = config_tools.loadTableMaster(
+                                tblMasterPenawaran, url_datatable_penawaran + _type_name.toLowerCase()
+                            );
+                        }
+                         
+                    }
+                    else{
+                        box_alert.alertError('GAGAL INFO', data.messages);
+                    }
+                });
+            },
+            tidak: function(){}
+        }
+    });
+}
