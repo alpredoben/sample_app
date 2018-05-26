@@ -26,7 +26,7 @@
                         </li>
                         <li role="separator" class="divider"></li>
                         <li>
-                            <a href="<?php echo site_url('sales/keluar') ?>">Keluar</a>
+                            <a href="<?php echo site_url('sales/logout') ?>">Keluar</a>
                         </li>
                     </ul>
                 </li>

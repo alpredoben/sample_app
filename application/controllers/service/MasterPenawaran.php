@@ -1,7 +1,6 @@
-<?php 
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php  defined('BASEPATH') OR exit('No direct script access allowed');
 
-class MasterPenawaran extends CI_Controller 
+class MasterPenawaran extends Web_Environment 
 {
     
     public function __construct()
@@ -11,7 +10,8 @@ class MasterPenawaran extends CI_Controller
         $this->load->model(array('penawaran_model'));
     }
     
-    public function datatable_item($type_name)
+    /** Datatable */
+    public function master_datatable_penawaran($type_name)
     {
         if(isset($_POST['search']))
             $search = $_POST['search']['value'];
@@ -54,7 +54,6 @@ class MasterPenawaran extends CI_Controller
                 $item->update_date,
                 $str
             );
-            
         }
      
         $output = array(
@@ -68,62 +67,107 @@ class MasterPenawaran extends CI_Controller
 
     }
 
-    public function insert_item_penawaran()
+    /** Set Insert Object Data Penawaran */
+    private function set_object_insert_penawaran($types, $input)
     {
-        $input = json_decode(file_get_contents('php://input'), true);
-        $insert_data = $this->set_insert_offer_machine($input['input_mesin']);
-        $insert = $this->offered_model->insertMachineOffer($insert_data);
-
-        if($insert == true){
-            $this->set_response(true, 'Data berhasil ditambahkan');
-        }
-        else{
-            $this->set_response(false, 'Data gagal ditambahkan');
-        }
-    }
-
-    public function datatable_produk()
-    {
-        if(isset($_POST['search']))
-            $search = $_POST['search']['value'];
-        
-        if(isset($_POST['draw']))
-            $draw = $_POST['draw'];
-
-        if(isset($_POST['length']))
-            $length = $_POST['length'];
-
-        if(isset($_POST['start']))
-            $start = $_POST['start'];
-
-        $record = $this->product_model->getDataTableProduct($search, $length, $start);
-        $dTable = array();
-        $no = $start;
-        foreach ($record as $item) {
-            $no++;
-            $str = '<button type="button" id="btnUpdate" class="btn btn-success" onclick="EditProduct(\''.$item->product_id.'\')">Ubah</button> &nbsp;';
-            $str .= '<button type="button" id="btnHapus" class="btn btn-danger" onclick="DeleteProduct(\''.$item->product_id.'\')">Hapus</button>';
-
-            $dTable[] = array(
-                $no,
-                $item->product_id,
-                $item->product_name,
-                $item->create_date,
-                $item->update_date,
-                $str
-            );
-            
-        }
-     
-        $output = array(
-            "draw"              => $draw,
-            "recordsTotal"      => $this->product_model->countRecordProduct(),
-            "recordsFiltered"   => $this->product_model->countFilterProduct($search),
-            "data"              => $dTable,
+        $object = array(
+            'id_kategori'   => getCategoryId($types),
+            'id_item'       => $input['id_item'],
+            'kuantitas'     => $input['kuantitas_item'],
+            'harga_item'    => $input['harga_item'],
+            'diskon'        => $input['diskon_item'],
+            'id_stok'       => 1,
+            'id_aktifasi'   => 4,
+            'id_status'     => 0,
+            'user_id'       => $input['id_user'],
+            'create_date'   => date('Y-m-d H:i:s'),
+            'update_date'   => date('Y-m-d H:i:s'),
+            'active_date'   => ''
         );
 
-        echo json_encode($output);
+        return $object;
     }
+
+    /** Insert/Save Item Penawaran */
+    public function save_item_penawaran($types)
+    {
+        $input = json_decode(file_get_contents('php://input'), true);
+
+        $object = $this->set_object_insert_penawaran($types, $input['input_produk']);
+        $insert = $this->penawaran_model->insert_data_penawaran($object);
+
+        if($insert == true)
+            $this->set_response(true, 'Data berhasil ditambahkan');
+        else
+            $this->set_response(false, 'Data gagal ditambahkan');
+    }
+
+    /** Remove/Disable Item Penawaran */
+    public function remove_item_penawaran($type_name, $id)
+    {
+        if(empty($id))
+            $this->set_response(false, 'Silahkan input id item '.$type_name.' penawaran yang akan di hapus');
+
+        $delete = $this->penawaran_model->delete_data_penawaran(getCategoryId($type_name), $id);
+
+        if($delete == true){
+            $this->set_response(true, 'Data berhasil di hapus');
+        }
+        else{
+            $this->set_response(false, 'Data gagal di hapus');
+        }
+    }
+
+    /** Set Update Aktivasi Penawaran */
+    public function set_aktivasi_item($type_name, $id)
+    {
+        if(empty($id))
+            $this->set_response(false, 'Silahkan input id item '.$type_name.' penawaran yang akan di aktivasi');
+
+        $aktivasi = $this->penawaran_model->set_aktivasi_item(getCategoryId($type_name), $id);
+        if($aktivasi == true){
+            $this->set_response(true, 'Pengajuan aktivasi data berhasil. ');
+        }
+        else{
+            $this->set_response(false, 'Pengajuan aktivasi data gagal');
+        }
+    }
+
+    /** Select item penawaran */
+    public function get_list_item_penawaran($type_name, $id)
+    {
+        $list_item = $this->penawaran_model->get_record_item_by(getCategoryId($type_name), $id);
+
+        if($list_item != false)
+            $this->set_response(true, $list_item);
+        else
+            $this->set_response(false, 'Id penawaran '.$id. ' untuk item '. $type_name.' tidak terdaftar');
+    }
+
+
+    /** Update item penawaran */
+    public function set_object_update($input)
+    {
+        $object = array(
+            'kuantitas' => $input['kuantitas'],
+            'harga_item' => $input['harga_item'] ,
+            'diskon' => $input['diskon'],
+            'user_id' => $input['id_user']
+        );
+        return $object;
+    }
+    public function update_item_penawaran($type_name)
+    {
+        $input  = json_decode(file_get_contents('php://input'), true)['data_update'];
+        $object = $this->set_object_update($input);
+        $update = $this->penawaran_model->update_data_penawaran($input['id_penawaran'], $object);
+
+        if($update == true)
+            $this->set_response(true, 'Data berhasil di ubah');
+        else
+            $this->set_response(false, 'Data gagal di ubah');
+    }
+
 }
 
 /* End of file MasterPenawaran.php */

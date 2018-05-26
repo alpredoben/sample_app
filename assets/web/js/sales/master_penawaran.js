@@ -1,10 +1,10 @@
 
 getLoadMasterPenawaran('kopi', pageFormsContent);
 
-function masterPenawaranMethod(_category)
+function masterPenawaranMethod(_category='')
 {
 
-    var _json_item_offer = {};
+    var _json_penawaran = {};
     var table_master_penawaran;
     
     $(btnKembali).hide();
@@ -23,7 +23,11 @@ function masterPenawaranMethod(_category)
         /** #################### @name EVENT_TEXTBOX_KUANTITAS_ITEM ################## **/
         $(txtKuantitasItem).blur(function (e) { 
             e.preventDefault();
-            _json_item_offer.kuantitas_item = parseInt($(this).val());
+
+            if($(btnSubmitItem).text().toLowerCase() == 'update')
+                data_update.kuantitas = parseInt($(this).val())
+
+            _json_penawaran.kuantitas_item = parseInt($(this).val());
             $(this).val( config_tools.convertNumberToCurrency($(this).val()) )
         });
        
@@ -35,7 +39,10 @@ function masterPenawaranMethod(_category)
         /** #################### @name EVENT_TEXTBOX_HARGA_ITEM ################## **/
         $(txtHargaItem).blur(function (e) { 
             e.preventDefault();
-            _json_item_offer.harga_item = parseInt($(this).val());
+            if($(btnSubmitItem).text().toLowerCase() == 'update')
+                data_update.harga_item = parseInt($(this).val())
+
+            _json_penawaran.harga_item = parseInt($(this).val());
             $(this).val( config_tools.convertNumberToCurrency($(this).val()) )
         });
 
@@ -47,7 +54,10 @@ function masterPenawaranMethod(_category)
         /** #################### @name EVENT_TEXTBOX_DISKON_ITEM ################## **/
         $(txtDiskonItem).blur(function (e) { 
             e.preventDefault();
-            _json_item_offer.diskon_item = parseInt($(this).val());
+            if($(btnSubmitItem).text().toLowerCase() == 'update')
+                data_update.diskon =  parseInt($(this).val())
+
+            _json_penawaran.diskon_item = parseInt($(this).val());
         });
        
         $(txtDiskonItem).keydown(function (e) { 
@@ -58,10 +68,7 @@ function masterPenawaranMethod(_category)
         /** #################### @name EVENT_BUTTON_SAVE_DATA_OR_UPDATE ################## **/
         $(btnSubmitItem).click(function (e) { 
             e.preventDefault();
-            var items_id        = $(optionItemName).val();
-            var kuantitas_item  = $(txtKuantitasItem).val();
-            var harga_item      = $(txtHargaItem).val();
-            var diskon_item     = $(txtDiskonItem).val();
+
             var text_button     = $(btnSubmitItem).text();
 
             if($(optionItemName).val() == '-'){
@@ -84,20 +91,43 @@ function masterPenawaranMethod(_category)
                 return false;
             }
     
+            _json_penawaran.id_item = $(optionItemName).val();
+            _json_penawaran.id_user = window.sess_all_data.unik_id_pengguna
+            //console.log(_json_penawaran);
 
             if(text_button.toLowerCase() == 'update'){
+                data_update.id_user = window.sess_all_data.unik_id_pengguna;
+
+                $.ajax({
+                    type: "post",
+                    url: url_update_penawaran +  data_update.id_kategori,
+                    contentType: "application/json",
+                    data: JSON.stringify({ data_update : data_update }),
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response);
+
+                        if(response.status == true){
+                            box_alert.alertSuccess('Successfully', response.messages);
+                            table_master_penawaran.ajax.reload()
+                        }
+                        else{
+                            box_alert.alertError('Failed', response.messages);
+                        }
+
+                        data_update = {};
+                        ResetFormItem();
+                    }
+                });
 
             }
             else{
 
-                _json_item_offer.items_id = $(optionItemName).val();
-                _json_item_offer.session_user_data = window.sess_all_data;
-
                 $.ajax({
                     type: "post",
-                    url: url_tambah_penawaran +  segment_item,
+                    url: url_insert_penawaran +  _category.toLowerCase(),
                     contentType: "application/json",
-                    data: JSON.stringify({ input_produk : _json_item_offer }),
+                    data: JSON.stringify({ input_produk : _json_penawaran }),
                     dataType: "json",
                     success: function (response) {
                         console.log(response);
@@ -109,7 +139,7 @@ function masterPenawaranMethod(_category)
                         else
                             box_alert.alertError('Failed', response.messages);
 
-                        _json_item_offer = {};
+                        _json_penawaran = {};
                     }
                 });
             

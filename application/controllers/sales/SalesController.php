@@ -65,37 +65,19 @@ class SalesController extends Web_Environment
     }
 
 
-
-
-    public function load_form_produk()
+    public function load_aktivasi_penawaran()
     {
-        $data = array(
-            'produk_kopi' => $this->product_model->getAllProduct()
-        );
-        $this->load->view($this->root_sales . 'pages/sales_form_produk', $data);
-    }
-
-    public function load_form_mesin()
-    {
-        $data = array(
-            'daftar_mesin' => $this->machine_model->getAllMachine()
-        );
-        $this->load->view($this->root_sales . 'pages/sales_form_mesin', $data);
-    }
-
-    public function load_form_sparepart()
-    {
-        $data = array(
-            'daftar_sparepart' => $this->sparepart_model->getAllSparepart()
-        );
-        $this->load->view($this->root_sales . 'pages/sales_form_sparepart', $data);
+        $data = $this->get_default(); 
+        $data['subtitle'] = 'AKTIVASI PENAWARAN';
+        $data['content']  = $this->root_sales . 'pages/aktivasi_penawaran';
+        $data['scripts']  = 'assets/web/js/sales/aktivasi_penawaran.js';
+		$this->render($this->root_sales . 'sales_layout', $data);
     }
 
     public function logout()
 	{
 		$this->session->sess_destroy();
 		redirect('pages/login','refresh');
-		
 	}
     
 

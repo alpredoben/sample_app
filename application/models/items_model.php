@@ -1,7 +1,9 @@
 <?php  defined('BASEPATH') OR exit('No direct script access allowed');
-require APPPATH . '/models/config_manager_model.php';
 
-class Items_model extends Config_manager_model {
+class Items_model extends CI_Model {
+
+    public $item_fields = array('kode_item', 'nama_item','create_date', 'update_date'); 
+    public $tbl_items = 'dto_items';
 
     public function get_list_item_by($type_id)
     {
@@ -14,9 +16,11 @@ class Items_model extends Config_manager_model {
         $this->db->where(array(
             'id_kategori' => $types,
             'id_status' => 0,
-            'kode_item' => $id,
-            'nama_item' => $name
         ));
+
+        $this->db->where('kode_item', $types);
+        $this->db->or_where('nama_item', $name);
+
         $select = $this->db->get($this->tbl_items);
         return ($select->num_rows() > 0) ? true : false;
     }

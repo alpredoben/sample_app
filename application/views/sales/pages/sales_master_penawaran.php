@@ -11,7 +11,7 @@
                         <select id="optionItemName" class="form-control">
                             <option value="-">-- Pilih Item --</option>
                             <?php foreach($data_items as $cf){ ?> 
-                                <option value="<?php echo $cf['kode_item'] ?>"><?php echo $cf['nama_item'] ?></option>
+                                <option value="<?php echo $cf['id_item'] ?>"><?php echo $cf['nama_item'] ?></option>
                             <?php } ?>
                         </select>
                     </div>

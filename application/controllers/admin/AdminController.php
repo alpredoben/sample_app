@@ -62,8 +62,8 @@ class AdminController extends Web_Environment {
     {
         $data = $this->get_default(); 
         $data['subtitle']  = 'MASTER DATA SPAREPART';
-        $data['nama_item'] = 'Mesin';
-        $data['content']   = $this->root_adm . 'pages/admin_sparepart';
+        $data['nama_item'] = 'Sparepart';
+        $data['content']   = $this->root_adm . 'pages/admin_master_item';
         $data['scripts']   = 'assets/web/js/adm/master_items.js';
 		$this->render($this->root_adm . 'admin_layout', $data);
     }

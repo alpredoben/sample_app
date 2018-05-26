@@ -1,7 +1,9 @@
 <?php  defined('BASEPATH') OR exit('No direct script access allowed');
-require APPPATH . '/models/config_manager_model.php';
 
-class User_model extends Config_manager_model {
+class User_model extends CI_Model {
+
+    public $tbl_user = 'dto_user';
+    public $tbl_level = 'dto_level';
 
     public function getRecordUserAccess($id, $pwd)
     {
@@ -16,5 +18,3 @@ class User_model extends Config_manager_model {
     }
 
 }
-
-/* End of file User_model.php */
