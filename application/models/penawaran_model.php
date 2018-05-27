@@ -97,9 +97,13 @@ class Penawaran_model extends CI_Model {
     }
 
     /** Set Aktivasi Item Penawaran */
-    public function set_aktivasi_item($type_id, $id)
+    public function set_aktivasi_item($type_id, $datetime, $id)
     {
-        $this->db->set('id_aktifasi', 2);
+        $this->db->set(array(
+            'id_aktifasi' => 2,
+            'active_date' => $datetime
+        ));
+        
         $this->db->where(array(
             'id_status' => 0,
             'id_kategori' => $type_id,

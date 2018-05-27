@@ -12,7 +12,7 @@ var url_delete_penawaran        = window.site_url + 'sales/master/penawaran/dele
 var url_select_penawaran        = window.site_url + 'sales/master/penawaran/select/item/';
 var url_update_penawaran        = window.site_url + 'sales/master/penawaran/update/item/';
 var url_datatable_penawaran     = window.site_url + 'sales/master/penawaran/datatable/item/';
-
+var url_aktivasi_penawaran      = window.site_url + 'sales/master/aktivasi_penawaran/item';
 
 /** ####################  @name DEFINE_VARIABLE_ELEMENT_HTML ####################### */
 var optionItemName      = '#optionItemName',

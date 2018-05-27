@@ -11,13 +11,12 @@
                                 <th>#</th>
                                 <th>KODE ITEM</th>
                                 <th>NAMA ITEM</th>
+                                <th>JENIS ITEM</th>
                                 <th>KUANTITAS</th>
-                                <th>HARGA (IDR)</th>
+                                <th>HARGA</th>
                                 <th>DISKON</th>
-                                <th>AKTIFASI</th>
-                                <th>KATEGORI</th>
-                                <th>CREATE DATE</th>
-                                <th>UPDATE DATE</th>
+                                <th>STATUS</th>
+                                <th>WAKTU VALIDASI</th>
                                 <th>#</th>
                             </tr>
                         </thead>

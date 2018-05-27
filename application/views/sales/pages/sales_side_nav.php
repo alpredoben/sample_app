@@ -16,7 +16,7 @@
     </li>
     <li class="list-group-item">
         <a href="<?php echo site_url('sales/aktivasi_penawaran'); ?>">
-            <i class="glyphicon glyphicon-level-up"></i> Aktivasi Penawaran
+            <i class="glyphicon glyphicon-level-up"></i> Validasi Penawaran
         </a>
     </li>
 </ul>

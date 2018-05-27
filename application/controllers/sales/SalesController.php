@@ -68,7 +68,7 @@ class SalesController extends Web_Environment
     public function load_aktivasi_penawaran()
     {
         $data = $this->get_default(); 
-        $data['subtitle'] = 'AKTIVASI PENAWARAN';
+        $data['subtitle'] = 'DATA STATUS VALIDASI PENAWARAN';
         $data['content']  = $this->root_sales . 'pages/aktivasi_penawaran';
         $data['scripts']  = 'assets/web/js/sales/aktivasi_penawaran.js';
 		$this->render($this->root_sales . 'sales_layout', $data);

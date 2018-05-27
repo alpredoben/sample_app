@@ -124,7 +124,8 @@ class MasterPenawaran extends Web_Environment
         if(empty($id))
             $this->set_response(false, 'Silahkan input id item '.$type_name.' penawaran yang akan di aktivasi');
 
-        $aktivasi = $this->penawaran_model->set_aktivasi_item(getCategoryId($type_name), $id);
+        $time_validate = date('Y-m-d H:i:s');
+        $aktivasi = $this->penawaran_model->set_aktivasi_item(getCategoryId($type_name), $time_validate, $id);
         if($aktivasi == true){
             $this->set_response(true, 'Pengajuan aktivasi data berhasil. ');
         }

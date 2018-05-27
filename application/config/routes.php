@@ -22,13 +22,16 @@ $route['sales/master/penawaran'] = 'sales/SalesController/view_master_penawaran'
 $route['sales/master/penawaran/item/(:any)'] = 'sales/SalesController/load_master_penawaran/$1';
 $route['sales/aktivasi_penawaran'] = 'sales/SalesController/load_aktivasi_penawaran';
 
-
 $route['sales/master/penawaran/insert/item/(:any)']                  = 'service/MasterPenawaran/save_item_penawaran/$1';
 $route['sales/master/penawaran/delete/item/(:any)/by/(:any)']        = 'service/MasterPenawaran/remove_item_penawaran/$1/$2';
 $route['sales/master/penawaran/set/activate/item/(:any)/by/(:any)']  = 'service/MasterPenawaran/set_aktivasi_item/$1/$2';
 $route['sales/master/penawaran/datatable/item/(:any)']               = 'service/MasterPenawaran/master_datatable_penawaran/$1';
 $route['sales/master/penawaran/select/item/(:any)/by/(:any)']        = 'service/MasterPenawaran/get_list_item_penawaran/$1/$2';
 $route['sales/master/penawaran/update/item/(:any)']                  = 'service/MasterPenawaran/update_item_penawaran/$1/$2';
+
+$route['sales/master/aktivasi_penawaran/item'] = 'service/MasterAktivasi/master_aktivasi_sales';
+
+
 
 /** Login Validation */
 $route['user/login/validate'] = 'AuthController/login_validate';
