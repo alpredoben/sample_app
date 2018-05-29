@@ -17,4 +17,13 @@ class User_model extends CI_Model {
         return ($select->num_rows() > 0) ? $select->result_array()[0] : false;
     }
 
+
+    public function get_user_by($level_id)
+    {
+        $fields = 'U.user_id, U.level_id, L.level_name, U.username, U.password';
+        $this->db->select($fields)->from($this->tbl_user.' U');
+        $this->db->join($this->tbl_level. ' L' , 'U.level_id = L.level_id', 'left');
+        $select = $this->db->where('U.level_id', $level_id)->get();
+        return ($select->num_rows() > 0) ? $select->result_array() : false;
+    }
 }

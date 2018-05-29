@@ -140,6 +140,7 @@ function masterPenawaranMethod(_category='')
                             box_alert.alertError('Failed', response.messages);
 
                         _json_penawaran = {};
+                        ResetFormItem();
                     }
                 });
             

@@ -17,7 +17,7 @@ class Penawaran_model extends CI_Model {
 
     
     /** DataTable Item Penawaran */
-    public function set_datatable_penawaran($types_id, $search = '')
+    public function set_datatable_penawaran($search = '', $user_id='', $types_id='')
     {
         $this->db->select($this->offer_fields);
         $this->db->from($this->tbl_penawaran . ' pn');
@@ -33,6 +33,17 @@ class Penawaran_model extends CI_Model {
             's.id_status' => 0,
             'kt.id_kategori' => $types_id
         ));
+
+        $this->db->where('ak.id_aktifasi', 4);
+        $this->db->where('st.id_stok', 1);
+        $this->db->where('s.id_status', 0);
+
+        if(!empty($type_id))
+            $this->db->where('kt.id_kategori', $types_id);
+
+        if(!empty($user_id))
+            $this->db->where('pn.user_id', $user_id);
+        
         
         $i=0;
         foreach ($this->offer_fields as $item) 
@@ -55,9 +66,9 @@ class Penawaran_model extends CI_Model {
         $this->db->order_by('pn.create_date', 'desc');
     }
 
-    public function get_datatable_penawaran($types_id, $search, $length, $start)
+    public function get_datatable_penawaran($search, $length, $start, $user_id='', $types_id='')
     {
-        $this->set_datatable_penawaran($types_id, $search);
+        $this->set_datatable_penawaran($search, $user_id, $types_id);
         
         if($length != -1)
             $this->db->limit($length, $start);
@@ -66,15 +77,15 @@ class Penawaran_model extends CI_Model {
         return $query->result();
     }
 
-    public function count_record_penawaran($types_id)
+    public function count_record_penawaran($user_id='', $types_id='')
     {
-        $this->set_datatable_penawaran($types_id);
+        $this->set_datatable_penawaran($user_id, $types_id);
         return $this->db->count_all_results();
     }
 
-    public function count_filter_penawaran($types_id, $search)
+    public function count_filter_penawaran($search='', $user_id='', $types_id='')
     {
-        $this->set_datatable_penawaran($types_id, $search);
+        $this->set_datatable_penawaran($search, $user_id, $types_id);
         $query = $this->db->get();
         return $query->num_rows();
     }

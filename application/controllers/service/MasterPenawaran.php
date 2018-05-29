@@ -11,7 +11,7 @@ class MasterPenawaran extends Web_Environment
     }
     
     /** Datatable */
-    public function master_datatable_penawaran($type_name)
+    public function master_datatable_penawaran($user_id, $type_name)
     {
         if(isset($_POST['search']))
             $search = $_POST['search']['value'];
@@ -27,7 +27,8 @@ class MasterPenawaran extends Web_Environment
         
         $types_id = getCategoryId($type_name);
 
-        $record = $this->penawaran_model->get_datatable_penawaran($types_id, $search, $length, $start);
+        //$search, $length, $start, $user_id='', $types_id=''
+        $record = $this->penawaran_model->get_datatable_penawaran($search, $length, $start, $user_id, $types_id);
 
         $dTable = array();
         $no = $start;
@@ -58,8 +59,8 @@ class MasterPenawaran extends Web_Environment
      
         $output = array(
             "draw"              => $draw,
-            "recordsTotal"      => $this->penawaran_model->count_record_penawaran($types_id),
-            "recordsFiltered"   => $this->penawaran_model->count_filter_penawaran($types_id, $search),
+            "recordsTotal"      => $this->penawaran_model->count_record_penawaran($user_id, $types_id),
+            "recordsFiltered"   => $this->penawaran_model->count_filter_penawaran($search, $user_id, $types_id),
             "data"              => $dTable,
         );
 

@@ -25,12 +25,23 @@ $route['sales/aktivasi_penawaran'] = 'sales/SalesController/load_aktivasi_penawa
 $route['sales/master/penawaran/insert/item/(:any)']                  = 'service/MasterPenawaran/save_item_penawaran/$1';
 $route['sales/master/penawaran/delete/item/(:any)/by/(:any)']        = 'service/MasterPenawaran/remove_item_penawaran/$1/$2';
 $route['sales/master/penawaran/set/activate/item/(:any)/by/(:any)']  = 'service/MasterPenawaran/set_aktivasi_item/$1/$2';
-$route['sales/master/penawaran/datatable/item/(:any)']               = 'service/MasterPenawaran/master_datatable_penawaran/$1';
+$route['sales/master/penawaran/datatable/item/(:any)/(:any)']               = 'service/MasterPenawaran/master_datatable_penawaran/$1/$2';
 $route['sales/master/penawaran/select/item/(:any)/by/(:any)']        = 'service/MasterPenawaran/get_list_item_penawaran/$1/$2';
 $route['sales/master/penawaran/update/item/(:any)']                  = 'service/MasterPenawaran/update_item_penawaran/$1/$2';
 
-$route['sales/master/aktivasi_penawaran/item'] = 'service/MasterAktivasi/master_aktivasi_sales';
+$route['sales/master/aktivasi_penawaran/(:any)/item'] = 'service/MasterAktivasi/master_aktivasi_sales/$1';
 
+/** ################################################## TAMBAHAN ########################################## */
+
+$route['admin/master/view/info/aktivasi'] = 'admin/AdminController/view_info_aktivasi';
+$route['admin/info/aktifasi'] = 'service/MasterAktivasi/get_info_aktivasi';
+$route['admin/data/user/by/(:any)'] = 'service/MasterUser/get_user_by/$1';
+
+$route['admin/master/set/item/actived'] = 'service/MasterAktivasi/set_item_activated';
+
+$route['admin/master/validasi/aktivasi'] = 'service/MasterAktivasi/show_datatable_aktivasi';
+$route['admin/master/validasi/aktivasi/(:any)'] = 'service/MasterAktivasi/show_datatable_aktivasi/$1';
+$route['admin/master/validasi/aktivasi/(:any)/user/(:any)'] = 'service/MasterAktivasi/show_datatable_aktivasi/$1/$2';
 
 
 /** Login Validation */

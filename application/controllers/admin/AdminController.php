@@ -15,7 +15,10 @@ class AdminController extends Web_Environment {
         }
         else {
             redirect('pages/login','refresh');
-        } 
+        }
+        
+        $this->load->model(array('aktivasi_model'));
+        
     }
     
     public function get_default()
@@ -68,13 +71,13 @@ class AdminController extends Web_Environment {
 		$this->render($this->root_adm . 'admin_layout', $data);
     }
 
-    public function view_aktivitas_pesanan()
+    public function view_info_aktivasi()
     {
-        // $data = $this->get_default(); 
-        // $data['subtitle'] = 'MASTER DATA AKTIVITAS PEMESANAN';
-        // $data['content']  = $this->root_adm . 'pages/admin_order_activate';
-        // $data['scripts']  = 'assets/web/js/item/order_detail.js';
-		// $this->render($this->root_adm . 'admin_layout', $data);
+        $data = $this->get_default(); 
+        $data['subtitle'] = 'VALIDASI PENAWARAN';
+        $data['content']  = $this->root_adm . 'pages/validasi_aktivasi';
+        $data['scripts']  = 'assets/web/js/adm/validasi_aktivasi.js';
+		$this->render($this->root_adm . 'admin_layout', $data);
     }
 
     

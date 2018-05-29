@@ -5,7 +5,7 @@
     </li>
 
     <li class="list-group-item">
-        <a href="<?php echo site_url('admin'); ?>">
+        <a href="<?php echo site_url('admin/dashboard'); ?>">
             <i class="glyphicon glyphicon-home"></i> Dashboard
         </a>
     </li>
@@ -28,7 +28,7 @@
     </li>
 
     <li class="list-group-item">
-        <a href="<?php echo site_url('admin/aktivitas_pesanan'); ?>">
-            <i class="glyphicon glyphicon-level-up"></i> Aktivasi Detail Pemesanan</a>
+        <a href="<?php echo site_url('admin/master/view/info/aktivasi'); ?>">
+            <i class="glyphicon glyphicon-level-up"></i> Validasi Item</a>
     </li>
 </ul>

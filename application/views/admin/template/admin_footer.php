@@ -7,6 +7,7 @@
 <script>
     window.site_url = "<?php echo base_url(); ?>";
     window.nama_master_item = "<?php echo (isset($nama_item)) ? strtolower($nama_item) : ''; ?>";
+    window.sess_all_data = <?php echo json_encode($this->session->all_userdata()); ?>
 </script>
 
 <script src="<?php echo base_url(); ?>assets/vendor/jquery/dist/jquery.min.js"></script>
@@ -17,7 +18,7 @@
 <script src="<?php echo base_url(); ?>assets/vendor/dataTable/js/jquery.dataTables.min.js"></script> 
 
 <script src="<?php echo base_url(); ?>assets/web/js/components.js"></script>
-<!-- <script src="<?php echo base_url(); ?>assets/web/js/adm/admin.js"></script> -->
+<script src="<?php echo base_url(); ?>assets/web/js/adm/admin.js"></script>
 <?php if(isset($scripts)){ ?> 
 <script src="<?php echo base_url().$scripts; ?>"></script>
 <?php } ?>
