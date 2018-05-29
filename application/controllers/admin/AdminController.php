@@ -38,13 +38,14 @@ class AdminController extends Web_Environment {
         $data = $this->get_default();
         $data['subtitle'] = 'ADMIN - DASHBOARD';
         $data['content']  = $this->root_adm . 'pages/admin_dashboard';
-		$this->render($this->root_adm . 'admin_layout', $data);
+        $data['scripts']  = 'assets/web/js/adm/validasi_aktivasi.js';
+        $this->render($this->root_adm . 'admin_layout', $data);
     }
 
     public function view_master_item_kopi()
     {
         $data = $this->get_default(); 
-        $data['subtitle'] = 'MASTER ITEM KOPI';
+        $data['subtitle'] = 'ADMIN - MASTER KOPI';
         $data['nama_item'] = 'Kopi';
         $data['content']  = $this->root_adm . 'pages/admin_master_item';
         $data['scripts']  = 'assets/web/js/adm/master_items.js';
@@ -54,7 +55,7 @@ class AdminController extends Web_Environment {
     public function view_master_item_mesin()
     {
         $data = $this->get_default(); 
-        $data['subtitle'] = 'MASTER DATA MESIN';
+        $data['subtitle'] = 'ADMIN - MASTER MESIN';
         $data['nama_item'] = 'Mesin';
         $data['content']  = $this->root_adm . 'pages/admin_master_item';
         $data['scripts']  = 'assets/web/js/adm/master_items.js';
@@ -64,21 +65,21 @@ class AdminController extends Web_Environment {
     public function view_master_item_sparepart()
     {
         $data = $this->get_default(); 
-        $data['subtitle']  = 'MASTER DATA SPAREPART';
+        $data['subtitle']  = 'ADMIN - MASTER SPAREPART';
         $data['nama_item'] = 'Sparepart';
         $data['content']   = $this->root_adm . 'pages/admin_master_item';
         $data['scripts']   = 'assets/web/js/adm/master_items.js';
 		$this->render($this->root_adm . 'admin_layout', $data);
     }
 
-    public function view_info_aktivasi()
-    {
-        $data = $this->get_default(); 
-        $data['subtitle'] = 'VALIDASI PENAWARAN';
-        $data['content']  = $this->root_adm . 'pages/validasi_aktivasi';
-        $data['scripts']  = 'assets/web/js/adm/validasi_aktivasi.js';
-		$this->render($this->root_adm . 'admin_layout', $data);
-    }
+    // public function view_info_aktivasi()
+    // {
+    //     $data = $this->get_default(); 
+    //     $data['subtitle'] = 'VALIDASI PENAWARAN';
+    //     $data['content']  = $this->root_adm . 'pages/validasi_aktivasi';
+    //     $data['scripts']  = 'assets/web/js/adm/validasi_aktivasi.js';
+	// 	$this->render($this->root_adm . 'admin_layout', $data);
+    // }
 
     
     public function keluar()

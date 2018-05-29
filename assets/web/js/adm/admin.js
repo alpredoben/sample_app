@@ -102,7 +102,7 @@ function loadInformation(){
             $('#admInfo').empty();
 
             if(response.status == true){
-                $('#admInfo').append('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PEMBERITAHUAN ['+response.messages+'] <span class="caret"></span></a><ul id="admInfo" class="dropdown-menu"><li><a href="' + window.site_url + 'admin/master/view/info/aktivasi"> Ada '+ response.messages +' Item Menunggu Validasi</a></li></ul>');
+                $('li#admInfo').append('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PEMBERITAHUAN ['+response.messages+'] <span class="caret"></span></a><ul class="dropdown-menu"><li><a href="' + window.site_url + 'admin/dashboard"> Ada '+ response.messages +' Item Menunggu Validasi</a></li></ul>');
             }
             else{
                 $('#admInfo').append('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PEMBERITAHUAN [0] <span class="caret"></span></a>');
@@ -115,4 +115,4 @@ function loadInformation(){
 
 loadInformation();
 
-setInterval(function(){ loadInformation(); }, 1800000);
+//setInterval(function(){ loadInformation(); }, 1800000);

@@ -27,8 +27,9 @@
         </a>
     </li>
 
-    <li class="list-group-item">
+    <!-- <li class="list-group-item">
         <a href="<?php echo site_url('admin/master/view/info/aktivasi'); ?>">
-            <i class="glyphicon glyphicon-level-up"></i> Validasi Item</a>
-    </li>
+            <i class="glyphicon glyphicon-level-up"></i> Validasi Item
+        </a>
+    </li> -->
 </ul>

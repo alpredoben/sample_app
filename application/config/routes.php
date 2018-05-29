@@ -33,7 +33,7 @@ $route['sales/master/aktivasi_penawaran/(:any)/item'] = 'service/MasterAktivasi/
 
 /** ################################################## TAMBAHAN ########################################## */
 
-$route['admin/master/view/info/aktivasi'] = 'admin/AdminController/view_info_aktivasi';
+// $route['admin/master/view/info/aktivasi'] = 'admin/AdminController/view_info_aktivasi';
 $route['admin/info/aktifasi'] = 'service/MasterAktivasi/get_info_aktivasi';
 $route['admin/data/user/by/(:any)'] = 'service/MasterUser/get_user_by/$1';
 
