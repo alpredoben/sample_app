@@ -183,9 +183,68 @@ class Aktivasi_model extends CI_Model {
         {
             return false;
         }
+    }
 
-       
+
+    /** @param PURCAHSE_ORDER */
+    public function set_purchase_order($search='')
+    {
+        $fields  = 'po.po_code, pn.id_penawaran, it.kode_item, it.nama_item, kt.nama_kategori, pn.kuantitas, pn.diskon, pn.harga_item, ak.nama_aktifasi, st.keterangan, us.username, po.activation_date';
+
+        $this->db->select($fields);
+        $this->db->from($this->tbl_penawaran . ' pn');
+        $this->db->join($this->tbl_po        . ' po', 'po.id_penawaran = pn.id_penawaran');
+        $this->db->join($this->tbl_items     . ' it', 'it.id_item = pn.id_item');
+        $this->db->join($this->tbl_aktifasi  . ' ak', 'ak.id_aktifasi = pn.id_aktifasi');
+        $this->db->join($this->tbl_kategori  . ' kt', 'kt.id_kategori = pn.id_kategori');
+        $this->db->join($this->tbl_status    . ' st', 'st.id_status = pn.id_status');
+        $this->db->join($this->tbl_user      . ' us', 'us.user_id = pn.user_id');
         
+        $i=0;
+        $fields = explode(',', ($fields));
+        foreach ($fields as $item) 
+        {
+            if($search != ''){
+                if($i==0){
+                    $this->db->group_start();
+                    $this->db->like(trim($item), $search);
+                }
+                else{
+                    $this->db->or_like(trim($item), $search);
+                }
+
+                if(count($fields)-1 == $i)
+                    $this->db->group_end();
+            }
+            $i++;
+        }
+
+        $this->db->order_by('po.po_code', 'asc');
+
+    }
+
+    public function get_purchase_order($search='', $length='', $start='')
+    {
+        $this->set_purchase_order($search);
+        
+        if($length != -1)
+            $this->db->limit($length, $start);
+
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function count_record_po($search='')
+    {
+        $this->set_purchase_order($search);
+        return $this->db->count_all_results();
+    }
+
+    public function count_filter_po($search='')
+    {
+        $this->set_purchase_order($search);
+        $query = $this->db->get();
+        return $query->num_rows();
     }
 
 }

@@ -1,7 +1,10 @@
 'use strict'
 
 var url_validasi_aktivasi = window.site_url + 'admin/master/validasi/aktivasi';
+var url_aktivasi_po = window.site_url + 'admin/master/aktivasi/po';
+
 var tblValidasiAktivasi = '#tblValidasiAktivasi';
+var tblPurchaseOrder = '#tblPurchaseOrder';
 
 function showSOUser(tools){
 
@@ -58,6 +61,8 @@ $(document).ready(function () {
 
     var optionSalesOrder = '#optionSalesOrder';
     var table_validasi_aktivasi = config_tools.loadTableMaster(tblValidasiAktivasi, url_validasi_aktivasi);
+    var table_aktivasi_po = config_tools.loadTableMaster(tblPurchaseOrder, url_aktivasi_po);
+
 
     setInterval(function(){ loadInformation(); }, 1800000);
 

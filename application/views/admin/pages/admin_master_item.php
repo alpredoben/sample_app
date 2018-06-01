@@ -32,15 +32,15 @@
                     <br>
 
                     <div class="col-md-12">
-                        <table id="tblMasterItem" class="display nowrap hover" style="width:100%">
+                        <table id="tblMasterItem" class=" nowrap row-border compact text-center" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Kode <?php echo $nama_item ?></th>
-                                    <th>Nama <?php echo $nama_item ?></th>
-                                    <th>Create Date</th>
-                                    <th>Update Date</th>
-                                    <th>#</th>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">Kode <?php echo $nama_item ?></th>
+                                    <th class="text-center">Nama <?php echo $nama_item ?></th>
+                                    <th class="text-center">Create Date</th>
+                                    <th class="text-center">Update Date</th>
+                                    <th class="text-center">#</th>
                                 </tr>
                             </thead>
                         </table>

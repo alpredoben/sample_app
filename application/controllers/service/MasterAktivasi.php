@@ -2,6 +2,11 @@
 
 class MasterAktivasi extends Web_Environment {
 
+    private $search;
+    private $length;
+    private $start;
+    private $draw;
+
     
     public function __construct()
     {
@@ -12,25 +17,28 @@ class MasterAktivasi extends Web_Environment {
         ));
     }
 
-    public function master_aktivasi_sales($user_id = '')
+    private function call_io_datatable()
     {
         if(isset($_POST['search']))
-            $search = $_POST['search']['value'];
+            $this->search = $_POST['search']['value'];
         
         if(isset($_POST['draw']))
-            $draw = $_POST['draw'];
+            $this->draw = $_POST['draw'];
 
         if(isset($_POST['length']))
-            $length = $_POST['length'];
+            $this->length = $_POST['length'];
 
         if(isset($_POST['start']))
-            $start = $_POST['start'];
+            $this->start = $_POST['start'];
+    }
 
-        $record = $this->aktivasi_model->get_datatable_aktivasi($search, $length, $start, $user_id, 2 );
-        //get_datatable_penawaran($search, $length, $start, $id_aktivasi='', $id_kategori='')
+    public function master_aktivasi_sales($user_id = '')
+    {
+        $this->call_io_datatable();
+        $record = $this->aktivasi_model->get_datatable_aktivasi($this->search, $this->length, $this->start, $user_id, 2 );
         
         $dTable = array();
-        $no = $start;
+        $no = $this->start;
         foreach ($record as $item) {
             $no++;
             
@@ -51,9 +59,9 @@ class MasterAktivasi extends Web_Environment {
         }
      
         $output = array(
-            "draw"              => $draw,
+            "draw"              => $this->draw,
             "recordsTotal"      => $this->aktivasi_model->count_record_aktivasi($user_id, 2),
-            "recordsFiltered"   => $this->aktivasi_model->count_filter_aktivasi($search, $user_id, 2),
+            "recordsFiltered"   => $this->aktivasi_model->count_filter_aktivasi($this->search, $user_id, 2),
             "data"              => $dTable,
         );
 
@@ -72,31 +80,12 @@ class MasterAktivasi extends Web_Environment {
 
     public function show_datatable_aktivasi($sales_id = '', $user_id='')
     {
-        if(isset($_POST['search']))
-            $search = $_POST['search']['value'];
-        
-        if(isset($_POST['draw']))
-            $draw = $_POST['draw'];
-
-        if(isset($_POST['length']))
-            $length = $_POST['length'];
-
-        if(isset($_POST['start']))
-            $start = $_POST['start'];
-        
-
-        $record = $this->aktivasi_model->get_wait_activated($search, $length, $start, 2, $user_id);
-
+        $this->call_io_datatable();
+        $record = $this->aktivasi_model->get_wait_activated($this->search, $this->length, $this->start, 2, $user_id);
         $dTable = array();
-
-        $no = $start;
+        $no = $this->start;
         foreach ($record as $item) {
-
-            //'pn.id_penawaran, it.id_item, it.kode_item, it.nama_item, pn.kuantitas, pn.harga_item, pn.diskon, kt.id_kategori, kt.nama_kategori, s.id_status, s.keterangan, st.id_stok, st.status_stok, ak.id_aktifasi, ak.nama_aktifasi, us.user_id, us.username pn.active_date'
-
-
             $no++;
-            
             $str = '<button type="button" id="btnApproveActivated" class="btn btn-primary" onclick="ApproveActivated(\''.$item->user_id.'\',\''.$item->id_penawaran.'\')">Aktifkan</button> &nbsp;';
 
             $dTable[] = array(
@@ -108,16 +97,16 @@ class MasterAktivasi extends Web_Environment {
                 number_format($item->kuantitas, 0, ",", "."),
                 $item->diskon,
                 number_format($item->harga_item, 0, ",", "."),
-                '<span style="background:blue; padding:5px; color:#fff;">'.$item->nama_aktifasi.'</span>',
+                '<span style="background:#ffcc00; padding:5px; color:#fff;">'.$item->nama_aktifasi.'</span>',
                 $item->active_date,
                 $str
             );
         }
      
         $output = array(
-            "draw"              => $draw,
+            "draw"              => $this->draw,
             "recordsTotal"      => $this->aktivasi_model->count_record_wait_aktivasi(2, $user_id),
-            "recordsFiltered"   => $this->aktivasi_model->count_filter_wait_aktivasi($search, 2, $user_id),
+            "recordsFiltered"   => $this->aktivasi_model->count_filter_wait_aktivasi($this->search, 2, $user_id),
             "data"              => $dTable,
         );
 
@@ -145,6 +134,48 @@ class MasterAktivasi extends Web_Environment {
         else
             $this->set_response(false, 'Aktivasi penawaran gagal');
         
+    }
+
+    /** Datatable Purchase Order */
+    public function purchase_order()
+    {   
+        $this->call_io_datatable();
+
+        $record = $this->aktivasi_model->get_purchase_order($this->search, $this->length, $this->start);
+        $dTable = array();
+
+        $no = $this->start;
+        foreach ($record as $item) 
+        {
+            $no++;
+            $str = '<button type="button" id="btnRemoveActivated" class="btn btn-danger" onclick="RemoveActivated(\''.$item->po_code.'\')">Remove</button> &nbsp;';
+
+            //$fields  = 'po.po_code, pn.id_penawaran, it.kode_item, it.nama_item, kt.nama_kategori, pn.kuantitas, pn.diskon, pn.harga_item';
+            //$fields .= 'ak.nama_aktifasi, st.keterangan, us.username, po.activation_date';
+
+            $dTable[] = array(
+                $no,
+                $item->po_code,
+                $item->kode_item,
+                $item->nama_item,
+                strtoupper($item->nama_kategori),
+                number_format($item->kuantitas, 0, ",", "."),
+                $item->diskon,
+                number_format($item->harga_item, 0, ",", "."),
+                '<span style="background:#00b3b3; padding:5px; color:#fff; ">'.$item->nama_aktifasi.' , '.$item->keterangan.'</span>',
+                $item->activation_date,
+                $str
+            );
+        }
+     
+        $output = array(
+            "draw"              => $this->draw,
+            "recordsTotal"      => $this->aktivasi_model->count_record_po(),
+            "recordsFiltered"   => $this->aktivasi_model->count_filter_po($this->search),
+            "data"              => $dTable,
+        );
+
+        echo json_encode($output);
     }
 }
 

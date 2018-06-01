@@ -50,6 +50,7 @@ class ConfigTools{
         return table_master;
     }
 
+
     loadLocationWindow(){
         window.location.reload();
     }

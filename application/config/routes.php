@@ -43,6 +43,18 @@ $route['admin/master/validasi/aktivasi'] = 'service/MasterAktivasi/show_datatabl
 $route['admin/master/validasi/aktivasi/(:any)'] = 'service/MasterAktivasi/show_datatable_aktivasi/$1';
 $route['admin/master/validasi/aktivasi/(:any)/user/(:any)'] = 'service/MasterAktivasi/show_datatable_aktivasi/$1/$2';
 
+$route['admin/master/aktivasi/po'] = 'service/MasterAktivasi/purchase_order';
+
+
+/** ############################# @param CUSTOMER #################################### */
+$route['customer/dashboard']        = 'customer/CustomerController/view_app';
+$route['customer/app/logout']       = 'customer/CustomerController/logout';
+$route['customer/app/order']        = 'customer/CustomerController/view_app';
+$route['customer/app/list/order']   = 'customer/CustomerController/view_list_order';
+$route['customer/app/list/category']= 'service/CustomerOrder/get_list_category';
+$route['customer/app/list/group_item'] = 'service/CustomerOrder/get_list_group_item';
+$route['customer/app/list/product/by/(:any)'] = 'service/CustomerOrder/get_list_product/$1';
+$route['customer/app/add/order/item'] = 'service/CustomerOrder/add_order_item';
 
 /** Login Validation */
 $route['user/login/validate'] = 'AuthController/login_validate';

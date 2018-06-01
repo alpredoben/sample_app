@@ -1,0 +1,143 @@
+<div class="content-row">
+
+	<div class="row">
+		<div class="col-md-12">
+			<form id="frmIdentify" class="form-horizontal">
+
+				<div class="col-md-6 col-sm-6">
+
+					<div class="form-group">
+						<label for="txtCompanyName" class="col-md-4 control-label">Company Name</label>
+						<div class="col-md-6">
+							<input type="text" id="txtCompanyName" class="form-control">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="areaStreetAddress" class="col-md-4 control-label">Street Address</label>
+						<div class="col-md-6">
+							<textarea id="areaStreetAddress" cols="30" class="form-control"></textarea>
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						<label for="txtEmail" class="col-md-4 control-label">Email</label>
+						<div class="col-md-6">
+							<input type="email" id="txtEmail" class="form-control">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="txtPhoneNumber" class="col-md-4 control-label">Phone Number</label>
+						<div class="col-md-6">
+							<input type="text" id="txtPhoneNumber" class="form-control">
+						</div>
+					</div>
+
+				</div>
+
+				<div class="col-md-6 col-sm-6">
+					<div class="form-group">
+						<label for="txtNoBillAccount" class="col-md-4 control-label">No.Bill Account</label>
+						<div class="col-md-6">
+							<input type="text" id="txtNoBillAccount" class="form-control">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="txtDateInvoice" class="col-md-4 control-label">Date Invoice</label>
+						<div class="col-md-6">
+							<input type="text" id="txtDateInvoice" class="form-control" readonly>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-offset-4 col-md-4">
+							<button type="button" id="btnSetBuyer" class="btn btn-info">Set Buyer</button>
+							<input type="button" id="btnResetBuyer" class="btn btn-danger" value="Reset Buyer">
+						</div>
+					</div>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+	<hr>
+
+	<div id="orderMenu" class="row">
+		<div class="col-md-12">
+			<form class="inline">
+				<div class="col-sm-2">
+					<label for="optItemCategory">Item Category</label>
+					<select id="optItemCategory" class="form-control">
+						<option value="-">-- Choose Category --</option>
+					</select>
+				</div>
+
+				<div class="col-md-2">
+					<label for="optGrupItem">Item Group Name</label>
+					<select id="optGrupItem" class="form-control">
+						<option value="-">-- Choose Group --</option>
+					</select>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+	<hr>
+
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="contents">
+
+				<table id="example" class="display select text-center" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th>
+								<input name="select_all" value="1" type="checkbox">
+							</th>
+							<th class="text-center">NO. PO</th>
+							<th class="text-center">KODE</th>
+							<th class="text-center">NAMA</th>
+							<th class="text-center">JENIS</th>
+							<th class="text-center">KUANTITAS</th>
+							<th class="text-center">DISKON</th>
+							<th class="text-center">HARGA</th>
+							<th class="text-center">TOTAL HARGA</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<th></th>
+							<th class="text-center">NO. PO</th>
+							<th class="text-center">KODE</th>
+							<th class="text-center">NAMA</th>
+							<th class="text-center">JENIS</th>
+							<th class="text-center">KUANTITAS</th>
+							<th class="text-center">DISKON</th>
+							<th class="text-center">HARGA</th>
+							<th class="text-center">TOTAL HARGA</th>
+						</tr>
+					</tfoot>
+				</table>
+
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+		<br>
+
+		<div class="col-md-12">
+			<div class="col-md-2">
+				<button type="button" id="btnAddListItem" class="btn btn-primary">Add Product List</button>
+			</div>
+		</div>
+	</div>
+
+</div>

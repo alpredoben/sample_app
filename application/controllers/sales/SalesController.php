@@ -41,13 +41,15 @@ class SalesController extends Web_Environment
         $data = $this->get_default();
         $data['subtitle'] = 'SALES - DASHBOARD';
         $data['content']  = $this->root_sales . 'pages/sales_dashboard';
+        $data['scripts']  = 'assets/web/js/sales/aktivasi_penawaran.js';
         $this->render($this->root_sales . 'sales_layout', $data);
+
     }
 
     public function view_master_penawaran()
     {
         $data = $this->get_default(); 
-        $data['subtitle'] = 'ITEM PENJUALAN';
+        $data['subtitle'] = 'SALES - ITEM PENJUALAN';
         $data['content']  = $this->root_sales . 'pages/master_penawaran_template';
         $data['scripts']  = 'assets/web/js/sales/master_penawaran.js';
 		$this->render($this->root_sales . 'sales_layout', $data);

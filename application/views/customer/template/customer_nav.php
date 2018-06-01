@@ -15,21 +15,15 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li id="admInfo" class="dropdown">
-                </li>
+                <li><a href="<?php echo site_url('customer/app/order'); ?>">ORDER ITEM</a></li>
+                <li><a href="<?php echo site_url(''); ?>">LIST ORDER</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <?php echo strtoupper($login_name) . ' ['. strtoupper($login_level) .']' ?>
+						<?php echo strtoupper($login_level); ?>
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li>
-                            <a href="#">Ubah Profil</a>
-                        </li>
-                        <li role="separator" class="divider"></li>
-                        <li>
-                            <a href="<?php echo site_url('admin/keluar') ?>">Keluar</a>
-                        </li>
+                        <li><a href="<?php echo site_url('customer/app/logout') ?>">Keluar</a></li>
                     </ul>
                 </li>
             </ul>

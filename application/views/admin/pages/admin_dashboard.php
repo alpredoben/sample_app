@@ -17,20 +17,20 @@
                     </form>
                 
                     <div class="table-responsive">
-                        <table id="tblValidasiAktivasi" class="display nowrap hover" style="width:100%">
+                        <table id="tblValidasiAktivasi" class="nowrap hover row-border text-center" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>KODE ITEM</th>
-                                    <th>NAMA ITEM</th>
-                                    <th>JENIS ITEM</th>
-                                    <th>SO NAME</th>
-                                    <th>KUANTITAS</th>
-                                    <th>DISKON</th>
-                                    <th>HARGA ITEM</th>
-                                    <th>STATUS</th>
-                                    <th>ACTIVE DATE</th>
-                                    <th>#</th>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">KODE</th>
+                                    <th class="text-center">NAMA ITEM</th>
+                                    <th class="text-center">JENIS</th>
+                                    <th class="text-center">SO NAME</th>
+                                    <th class="text-center">KUANTITAS</th>
+                                    <th class="text-center">DISKON</th>
+                                    <th class="text-center">HARGA</th>
+                                    <th class="text-center">STATUS</th>
+                                    <th class="text-center">ACTIVE DATE</th>
+                                    <th class="text-center">#</th>
                                 </tr>
                             </thead>
                         </table>
@@ -44,13 +44,32 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-success">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Pesanan Pembelian - Penawaran Item Yang Sudah Disetujui</h3>
+                    <h3 class="panel-title">Pesanan Pembelian</h3>
                 </div>
                 
                 <div class="panel-body">
-                
+                    <p>Data tabel penawaran item yang telah disetujui.</p>
+                    <div class="table-responsive">
+                        <table id="tblPurchaseOrder" class="display nowrap hover row-border" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">PO ID</th>
+                                    <th class="text-center">KODE</th>
+                                    <th class="text-center">NAMA ITEM</th>
+                                    <th class="text-center">JENIS</th>
+                                    <th class="text-center">KUANTITAS</th>
+                                    <th class="text-center">DISKON</th>
+                                    <th class="text-center">HARGA ITEM</th>
+                                    <th class="text-center">STATUS ITEM</th>
+                                    <th class="text-center">ACTIVE DATE</th>
+                                    <th class="text-center">#</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

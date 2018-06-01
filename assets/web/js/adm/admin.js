@@ -12,7 +12,6 @@ var txtKodeItem     = '#txtKodeItem',
     btnKembali      = '#btnKembali',
     tblMasterItem   = '#tblMasterItem';
 
-
 /** @name DEFINE_VARIABLE_ROUTE_ */
 var url_insert_item         = window.site_url + 'admin/master/item/insert/item/' + window.nama_master_item;
 var url_update_item         = window.site_url + 'admin/master/item/update/item/' + window.nama_master_item;

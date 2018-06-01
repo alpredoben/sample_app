@@ -5,7 +5,7 @@
     </li>
 
     <li class="list-group-item">
-        <a href="<?php echo site_url('sales'); ?>">
+        <a href="<?php echo site_url('sales/dashboard'); ?>">
             <i class="glyphicon glyphicon-home"></i> Dashboard
         </a>
     </li>
@@ -14,9 +14,9 @@
             <i class="glyphicon glyphicon-list-alt"></i> Master Penawaran
         </a>
     </li>
-    <li class="list-group-item">
+    <!-- <li class="list-group-item">
         <a href="<?php echo site_url('sales/aktivasi_penawaran'); ?>">
             <i class="glyphicon glyphicon-level-up"></i> Validasi Penawaran
         </a>
-    </li>
+    </li> -->
 </ul>
