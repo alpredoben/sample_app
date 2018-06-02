@@ -172,6 +172,66 @@ class CustomerOrder extends Web_Environment {
         
     }
 
+    public function pay_order_item()
+    {
+        $input = json_decode(file_get_contents('php://input'), true);
+        $customer = $input['customers'];
+        $bool = true;
+
+        if($this->bag_cart->check_cart() == true) {
+            
+            $list_order = $this->bag_cart->get_cart();
+
+            $objects = array();
+
+            foreach ($list_order as $value) 
+            {
+                $create_date = date('Y-m-d H:i:s');
+                
+                $objects[] = array(
+                    'id_order'          => $value['id'],
+                    'no_po_order'       => $value['po_code'],
+                    'kode_produk'       => $value['name'],    
+                    'no_bill'           => $customer['no_bill_account'], 
+                    'customer_name'     => $customer['comp_name'],
+                    'customer_email'    => $customer['comp_email'],
+                    'customer_phone'    => $customer['comp_phone'],
+                    'customer_address'  => $customer['comp_address'],
+                    'invoice_date'      => $customer['invoice_date'],
+                    'nama_produk'       => $value['nama_item'],
+                    'kategori_produk'   => $value['nama_kategori'],
+                    'kuantitas'         => $value['kuantitas'],
+                    'diskon'            => $value['diskon'],
+                    'harga_produk'      => $value['harga_item'],
+                    'total_harga'       => $value['price'],
+                    'created_date'      => $create_date,
+                );            
+            }
+
+            
+            $insert_order = $this->cs_order_model->add_customer_order($objects);
+            
+            if($insert_order != false)
+            {
+                $delete_cart = $this->bag_cart->delete_all_item_cart();
+
+                if($delete_cart == true){
+                    $this->set_response(true, 'Proses pemesanan produk berhasil');
+                }
+                else{
+                    $this->set_response(false, 'Proses pemesanan produk gagal. Terjadi kesalah pada cart');
+                }
+            }
+            else
+                $this->set_response(false, 'Proses pemesanan produk gagal');
+                
+        }
+        else{
+            $this->set_response(false, 'Daftar produk yang dipesan kosong');
+        }
+
+    }
+
 }
 
 /* End of file CustomerOrder.php */

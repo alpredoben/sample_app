@@ -71,6 +71,22 @@ class Bag_cart {
         return false;
     }
 
+
+    public function delete_all_item_cart()
+    {
+        if($this->check_cart() == true)
+        {   
+            foreach ($this->CI->cart->contents() as $item) {
+                $this->delete_cart_index_by($item['rowid']);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+
     public function get_total_price_cart()
     {
         return $this->CI->cart->total();

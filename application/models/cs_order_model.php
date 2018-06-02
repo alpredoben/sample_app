@@ -12,6 +12,8 @@ class Cs_order_model extends CI_Model {
     private $tbl_status = 'dto_status';
     private $tbl_po = 'dto_purchase_order';
 
+    private $tbl_customer_order = 'dto_customer_order';
+
     public function get_category_item($id_kategori = '')
     {
         if(!empty($id_kategori))
@@ -117,6 +119,13 @@ class Cs_order_model extends CI_Model {
         $select = $this->db->get();
         return ($select->num_rows() > 0) ? $select->result_array() : false;
 
+    }
+
+    public function add_customer_order($object)
+    {
+        
+        $insert = $this->db->insert_batch($this->tbl_customer_order, $object);
+        return ($insert) ? true : false;
     }
 
 }

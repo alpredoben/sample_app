@@ -138,12 +138,31 @@
                         <th class="text-center text-info">KUANTITAS</th>
                         <th class="text-center text-info">DISKON</th>
                         <th class="text-center text-info">HARGA</th>
-                        <th class="text-center text-info">TOTAL HARGA</th>
+                        <th class="text-center text-info">JUMLAH HARGA</th>
                         <th class="text-center text-info">ACTION</th>
                     </tr>
                 </thead>
+                <tfoot>
+                    <tr>
+                        <th colspan="8" style="text-align:right">TOTAL HARGA (IDR) :</th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+
             </table>
         </div>
+
+        <div class="clearfix"></div><br>
+
+        <div class="col-sm-12">
+            <form id="frmSubmitOrderProductItem" class="form-inline">
+                <div class="col-sm-6">
+                    <label class="control-label">Click "Submit Order" To Buy and Approve Order Product Item</label>
+                    <button type="button" class="btn btn-primary" id="btnSubmitOrder">Submit Order</button>
+                </div>
+            </form>
+        </div>
+
     </div>
 
 </div>

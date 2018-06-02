@@ -5,7 +5,7 @@ var URL_GROUP_ITEM_LIST = window.site_url + 'customer/app/list/group_item';
 var URL_PRODUCT_ITEM = window.site_url + 'customer/app/list/product/by/';
 var URL_ADD_LIST_ORDER_ITEM = window.site_url + 'customer/app/add/order/item';
 var URL_GET_CART_ORDER_ITEM = window.site_url + 'customer/app/get/cart/order/item';
-
+var URL_PAY_ORDER_ITEM = window.site_url + 'customer/app/pay/cart/order/item';
 
 var _list_cart = {}
 
@@ -88,7 +88,29 @@ function load_datatable_order_list(_element){
                 "targets": [ 0 ], 
                 "orderable": false, 
             },
-        ]    
+        ],
+        "footerCallback": function ( row, data, start, end, display ) {
+            var api = this.api(), data;
+            
+            // // Remove the formatting to get integer data for summation
+            var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '')*1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+ 
+            // Total over all pages
+            var total = api.column(8).data().reduce(function (a, b) { return intVal(a) + intVal(b); }, 0);
+            
+            // // Total over this page
+            var pageTotal = api.column( 8, { page: 'current'} ).data().reduce( function (a, b) { 
+                return intVal(a) + intVal(b); 
+            }, 0 );
+ 
+            // // Update footer
+            $(api.column(8).footer()).html( total );
+        }    
 
     });
 
@@ -131,7 +153,7 @@ $(document).ready(function () {
 
         }
         else {
-            warning_messages('Please choose item category');
+            warning_messages('Silahkan pilih kategori');
         }
 
     });
@@ -150,7 +172,7 @@ $(document).ready(function () {
             );
         }
         else{
-            warning_messages('Please choose item group name');
+            warning_messages('Silahkan pilih nama group item');
         }
 
     });
@@ -165,11 +187,11 @@ $(document).ready(function () {
             axios.post(URL_ADD_LIST_ORDER_ITEM, { list_item : rowsel.join(',') }).then(function (response) {
 
                 if(response.data.status == true){
-                    box_alert.alertSuccess('INSERT SUCCESS', response.data.messages);
+                    box_alert.alertSuccess('BERHASIL', response.data.messages);
                     order_table.ajax.reload();
                 }
                 else{
-                    box_alert.alertError('INSERT FAILED', response.data.messages);
+                    box_alert.alertError('GAGAL', response.data.messages);
                 }
 
 
@@ -181,12 +203,42 @@ $(document).ready(function () {
 
         }
         else{
-            warning_messages('Please check or choose item which will you want to insert');
+            warning_messages('Silahkan pilih item yang ingin ditambahkan');
         }
 
 
     });
 
+
+    $('#btnSubmitOrder').click(function (e) { 
+        e.preventDefault();
+        var _user_order = {
+            comp_name : $('#txtCompanyName').val(),
+            comp_address: $('#areaStreetAddress').val(),
+            comp_email: $('#txtEmail').val(),
+            comp_phone: $('#txtNumberPhone').val(),
+            no_bill_account: $('#txtNoBillAccount').val(),
+            invoice_date: $('#txtDateInvoice').val()
+        };
+
+        
+        axios.post(URL_PAY_ORDER_ITEM, { customers : _user_order }).then(function (response) {
+            if(response.data.status == true){
+                box_alert.alertSuccess('BERHASIL', response.data.messages);
+                $('#frmidentify')[0].reset();
+                list_table.ajax.reload();
+                order_table.ajax.reload()
+            }
+            else{
+                box_alert.alertError('GAGAL', response.data.messages);
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+    });
+
+    
 
    
 });
