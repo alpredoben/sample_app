@@ -56,6 +56,9 @@ $route['customer/app/list/group_item'] = 'service/CustomerOrder/get_list_group_i
 $route['customer/app/list/product/by/(:any)'] = 'service/CustomerOrder/get_list_product/$1';
 $route['customer/app/add/order/item'] = 'service/CustomerOrder/add_order_item';
 
+$route['customer/app/get/cart/order/item'] = 'service/CustomerOrder/get_data_cart_order';
+
+
 /** Login Validation */
 $route['user/login/validate'] = 'AuthController/login_validate';
 $route['pages/login']         = 'AuthController/view_login';

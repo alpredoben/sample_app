@@ -11,7 +11,10 @@ class CustomerOrder extends Web_Environment {
             'cs_order_model',
         ));
 
-        $this->load->library('cart');
+        $this->load->library(array(
+            'cart',
+            'bag_cart'
+        ));
         
     }
 
@@ -88,7 +91,6 @@ class CustomerOrder extends Web_Environment {
 
     public function add_order_item()
     {
-        //po.id, po.po_code, it.kode_item, it.nama_item, kt.nama_kategori, pn.kuantitas, pn.diskon, pn.harga_item
         $input = json_decode(file_get_contents('php://input') ,true);
         $list_order = $this->cs_order_model->get_list_order_by($input['list_item']);
 
@@ -102,6 +104,7 @@ class CustomerOrder extends Web_Environment {
                 {
                     $tmp_cart = array(
                         'id'            => $v['id'],
+                        'po_code'       => $v['po_code'],
                         'name'          => $v['kode_item'],
                         'nama_item'     => $v['nama_item'],
                         'nama_kategori' => $v['nama_kategori'],
@@ -118,8 +121,9 @@ class CustomerOrder extends Web_Environment {
                 }
             }
 
-            if(count($_result) > 0){
-                $this->set_response(true, 'Insert item to cart list success', $_result);
+            if(count($_result) > 0)
+            {
+                $this->set_response(true, 'Insert item to cart list success');
             }
             else{
                 $this->set_response(false, 'Items have been inserted to cart list');
@@ -128,6 +132,44 @@ class CustomerOrder extends Web_Environment {
         }
         else
             $this->set_response(false, 'Insert item to cart list failed. No record item list in Database');
+    }
+
+    public function get_data_cart_order()
+    {
+
+        if($this->bag_cart->check_cart() == true){
+            $record_cart = $this->bag_cart->get_cart();
+            $total_price = $this->bag_cart->get_total_price_cart();
+
+            $_json_data = array('data' => array());
+
+
+            $index = 0;
+            foreach ($record_cart as $v) {
+                $index += 1;
+                $button = '<button type="button" id="btnDelete'.$v['id'].'" class="btn btn-danger" onclick="DeleteOrderItem(\''.$v['id'].'\')">Delete</button>';
+                $tmp = array(
+                    $index,
+                    $v['po_code'],
+                    $v['name'],
+                    $v['nama_item'],
+                    $v['nama_kategori'],
+                    $v['kuantitas'],
+                    $v['diskon'],
+                    $v['harga_item'],
+                    $v['price'],
+                    $button
+                );
+
+                array_push($_json_data['data'], $tmp);
+            }
+
+            $this->set_response(true, array('record_data' => $_json_data, 'total_prices' => $total_price));
+        }
+        else{
+            $this->set_response(false, 'No Record Cart Order Item');
+        }
+        
     }
 
 }

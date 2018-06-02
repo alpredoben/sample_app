@@ -1,7 +1,7 @@
 <div class="content">
     <div class="row">
         <div class="col-sm-12">
-
+            <h3 class="text-primary">Form Customer Identity</h3>
             <form class="form-horizontal" id="frmidentify">
                 <div class="col-sm-6">
 
@@ -68,6 +68,7 @@
 
     <div class="row">
         <div class="col-sm-12">
+            <h3 class="text-success">List Product/Item Available</h3>
             <form>
                 <div class="col-sm-2">
                     <label for="optItemCategory">Item Category</label>
@@ -90,19 +91,19 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <table id="myListTable" class="table table-bordered table-striped table-hover">
+            <table id="myListTable" class="table table-striped table-hover">
                 
                 <thead>
                     <tr>
                         <th></th>
-                        <th>NO. PO</th>
-                        <th>KODE</th>
-                        <th>NAMA</th>
-                        <th>JENIS.</th>
-                        <th>KUANTITAS</th>
-                        <th>DISKON</th>
-                        <th>HARGA</th>
-                        <th>TOTAL HARGA</th>
+                        <th class="text-center text-success">NO. PO</th>
+                        <th class="text-center text-success">KODE</th>
+                        <th class="text-center text-success">NAMA</th>
+                        <th class="text-center text-success">JENIS.</th>
+                        <th class="text-center text-success">KUANTITAS</th>
+                        <th class="text-center text-success">DISKON</th>
+                        <th class="text-center text-success">HARGA</th>
+                        <th class="text-center text-success">TOTAL HARGA</th>
                     </tr>
                 </thead>
 
@@ -118,6 +119,30 @@
                     <button type="button" class="btn btn-success" id="btnInsertItem">Insert Item</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <div class="clearfix"></div><hr>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="text-info">Your List Order</h3>
+            <table id="tblCartListOrder" class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center text-info">#</th>
+                        <th class="text-center text-info">NO. PO</th>
+                        <th class="text-center text-info">KODE</th>
+                        <th class="text-center text-info">NAMA</th>
+                        <th class="text-center text-info">JENIS</th>
+                        <th class="text-center text-info">KUANTITAS</th>
+                        <th class="text-center text-info">DISKON</th>
+                        <th class="text-center text-info">HARGA</th>
+                        <th class="text-center text-info">TOTAL HARGA</th>
+                        <th class="text-center text-info">ACTION</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
     </div>
 

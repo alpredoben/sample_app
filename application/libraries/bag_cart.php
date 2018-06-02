@@ -13,14 +13,14 @@ class Bag_cart {
         $this->CI->load->library('cart');;
     }
 
-    public function check_bag_cart()
+    public function check_cart()
     {
         return (count($this->CI->cart->contents()) > 0) ? true : false;
     }
 
-    public function get_bag_cart()
+    public function get_cart()
     {
-        if($this->check_bag_cart() == true)
+        if($this->check_cart() == true)
         {
             $_data = array();
 
@@ -29,14 +29,20 @@ class Bag_cart {
                 $_sets = array();
 
                 if(isset($item['id']))
-                    $_sets['id_po']         = $item['id'];
+                    $_sets['id']            = $item['id'];
+
+                if(isset($item['po_code']))
+                    $_sets['po_code']       = $item['po_code'];
 
                 if(isset($item['name']))
-                    $_sets['kode_item']     = $item['name'];
+                    $_sets['name']          = $item['name'];
 
                 if(isset($item['nama_item']))
                     $_sets['nama_item']     = $item['nama_item'];
                 
+                if(isset($item['nama_kategori']))
+                    $_sets['nama_kategori'] = $item['nama_kategori'];
+
                 if(isset($item['kuantitas']))
                     $_sets['kuantitas']     = $item['kuantitas'];
 
@@ -47,7 +53,7 @@ class Bag_cart {
                     $_sets['harga_item']    = $item['harga_item'];
 
                 if(isset($item['price']))
-                    $_sets['total_harga']   = $item['price'];
+                    $_sets['price']         = $item['price'];
 
                 if(isset($item['qty']))
                     $_sets['qty']           = $item['qty'];
@@ -55,81 +61,30 @@ class Bag_cart {
                 if(isset($item['rowid']))
                     $_sets['rowid']         = $item['rowid'];
 
+                
                 $_data[] = $_sets;
             }
 
-            return _data
+            return $_data;
         }
        
         return false;
     }
 
-    
-
-    public function JSONDataTable($record)
+    public function get_total_price_cart()
     {
-        $dTable = array();
-
-        if(is_array($record) && count($record) > 0)
-        {
-            foreach ($record as $item) 
-            {
-                $str = '<button type="button" id="btnDeleteRecordTabel" class="hapus_cart btn btn-danger btn-xs" onclick="DeleteRecordTabelCart(\''.$item['code_keranjang'].'\')" style="margin-left:-10px;">Batal</button>';
-                
-                $dTable[] = array(
-                    $item['no_baris'],
-                    $item['no_pelanggan'],
-                    $item['nama_pelanggan'],
-                    $item['keterangan'],
-                    $item['jenis_transaksi'],
-                    $item['nominal_tagihan'],
-                    $str
-                );
-            }
-        }
-
-        return $dTable;
+        return $this->CI->cart->total();
     }
 
-    public function getPivotTable($pivot_cart)
-    {
-        if(is_array($pivot_cart) && count($pivot_cart) > 0)
-        {
-            $result = array();
-
-            foreach ($pivot_cart as $item) 
-            {
-                $sets = array();
-
-                $sets['no_baris']        = $item['no_baris'];
-                $sets['no_pelanggan']    = $item['no_pelanggan'];
-                $sets['nama_pelanggan']  = $item['nama_pelanggan'];
-                $sets['keterangan']      = $item['keterangan'];
-                $sets['jenis_transaksi'] = strtoupper($item['inm_info_produk']);
-                $sets['nominal_tagihan'] = 'Rp. '. number_format($item['price'], 0, ",", ".");
-                $sets['code_keranjang']  = $item['rowid'];
-                $result[] = $sets;
-            }
-
-            return $result;
-        }
-
-        return 'No Available Data Cart';
-    }
-
-    public function getTotalOrder()
-    {
-        return $this->pci->cart->total();
-    }
-
-    public function removeCartById($cart_id)
+    public function delete_cart_index_by($row_id)
     {
         $data = array(
-            'rowid' => $cart_id,
-            'qty' => 0,
+            'rowid' => $row_id,
+            'qty' => 0
         );
-        $this->pci->cart->update($data);
-    }
+        $this->CI->cart->update($data);
+    }    
+
     
 }   
 

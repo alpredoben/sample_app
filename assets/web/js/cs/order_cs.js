@@ -4,6 +4,8 @@ var URL_CATEGORY_ITEM = window.site_url + 'customer/app/list/category';
 var URL_GROUP_ITEM_LIST = window.site_url + 'customer/app/list/group_item';
 var URL_PRODUCT_ITEM = window.site_url + 'customer/app/list/product/by/';
 var URL_ADD_LIST_ORDER_ITEM = window.site_url + 'customer/app/add/order/item';
+var URL_GET_CART_ORDER_ITEM = window.site_url + 'customer/app/get/cart/order/item';
+
 
 var _list_cart = {}
 
@@ -63,15 +65,50 @@ function load_datatable_item(_element, _path_url)
     return mytable;
 }
 
+function load_datatable_order_list(_element){
+    
+    if( $.fn.DataTable.isDataTable(_element) ){
+        $(_element).DataTable().destroy();
+    }
+
+    var _table = $(_element).DataTable({
+        "searching" : false,
+        "ajax": {
+            "url": URL_GET_CART_ORDER_ITEM,
+            "type": "GET",
+            "dataSrc" : function(json){
+                if(json.status == true){
+                    return json.messages.record_data.data;
+                }
+                
+            }
+        },   
+        "columnDefs": [
+            { 
+                "targets": [ 0 ], 
+                "orderable": false, 
+            },
+        ]    
+
+    });
+
+    return _table
+
+}
+
 
 $(document).ready(function () {
 
     var list_table;
+    var order_table;
 
     _list_cart.id_list = [];
 
     $('#txtDateInvoice').val(get_now_date_format());
     load_category_item('#optItemCategory');
+
+    order_table = load_datatable_order_list('#tblCartListOrder');
+
 
     /** Event Item Category Change */
     $('#optItemCategory').change(function (e) { 
@@ -129,6 +166,7 @@ $(document).ready(function () {
 
                 if(response.data.status == true){
                     box_alert.alertSuccess('INSERT SUCCESS', response.data.messages);
+                    order_table.ajax.reload();
                 }
                 else{
                     box_alert.alertError('INSERT FAILED', response.data.messages);
